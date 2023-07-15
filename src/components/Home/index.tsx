@@ -1,31 +1,28 @@
-import { useState, useEffect, useCallback } from "react";
-import { User, onAuthStateChanged, signOut } from "firebase/auth";
-
-import { auth } from "../../services/firebase";
+import { useEffect, useCallback } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 
+import { resetUser, setUser } from "../../features/user/userSlice";
+import { useAppSelector } from "../../hooks/redux/useAppSelector";
+import { useAppDispatch } from "../../hooks/redux/useAppDispatch";
+import { auth } from "../../services/firebase";
+
 export const Home = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const user = useAppSelector((state) => state.user.userData);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        console.log("user is logged out");
-      }
-    });
-  }, []);
+    onAuthStateChanged(auth, (user) =>
+      dispatch(user ? setUser(user) : resetUser())
+    );
+  }, [dispatch]);
 
   const handleLogout = useCallback(() => {
     signOut(auth)
       .then(() => {
-        setUser(null);
         console.log("Signed out successfully");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(console.error);
   }, []);
 
   return (
@@ -57,23 +54,5 @@ export const Home = () => {
         </div>
       </div>
     </div>
-    // <div>
-    //   <h1>Hi!</h1>
-    //   <pre>{JSON.stringify(user, null, 4)}</pre>
-    //   {user ? (
-    //     <button className="btn btn-accent" onClick={handleLogout}>
-    //       Logout
-    //     </button>
-    //   ) : (
-    //     <div className="flex gap-2">
-    //       <Link className="btn btn-accent" to="/login">
-    //         Login
-    //       </Link>
-    //       <Link className="btn btn-accent" to="/signup">
-    //         Sign Up
-    //       </Link>
-    //     </div>
-    //   )}
-    // </div>
   );
 };
