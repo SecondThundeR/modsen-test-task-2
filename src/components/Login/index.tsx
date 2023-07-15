@@ -1,18 +1,18 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+
+import { AlertError } from "@/components/AlertError";
 
 import { ROUTES } from "@/constants/routes";
 
 import { useLogin } from "@/hooks/useLogin";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { isLoading, onSubmit } = useLogin(email, password);
+  const { isLoading, error, onSubmit } = useLogin();
 
   return (
     <div className="flex flex-col gap-4 m-4">
       <h1 className="text-2xl text-bold">Login</h1>
+      <AlertError error={error} />
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <div className="form-control w-full max-w-xs">
           <label className="label" htmlFor="email">
@@ -24,7 +24,7 @@ export const Login = () => {
             type="email"
             placeholder="Enter email address"
             className="input input-bordered w-full max-w-xs"
-            onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
 
@@ -38,9 +38,10 @@ export const Login = () => {
             type="password"
             placeholder="Enter password"
             className="input input-bordered w-full max-w-xs"
-            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
+
         <button
           type="submit"
           className="btn btn-primary w-fit"
