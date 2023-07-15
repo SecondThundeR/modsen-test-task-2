@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { type User } from "firebase/auth";
 
 export interface UserState {
-  userData: User | null;
+  userData: Pick<User, "uid" | "email"> | null;
 }
 
 const initialState: UserState = {
@@ -13,7 +13,10 @@ export const counterSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User>) => {
+    setUser: (
+      state,
+      action: PayloadAction<NonNullable<UserState["userData"]>>
+    ) => {
       state.userData = action.payload;
     },
     resetUser: (state) => {
