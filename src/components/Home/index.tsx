@@ -2,10 +2,12 @@ import { useEffect, useCallback } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 
-import { resetUser, setUser } from "../../features/user/userSlice";
-import { useAppSelector } from "../../hooks/redux/useAppSelector";
-import { useAppDispatch } from "../../hooks/redux/useAppDispatch";
-import { auth } from "../../services/firebase";
+import { resetUser, setUser } from "@/features/user/userSlice";
+
+import { useAppSelector } from "@/hooks/redux/useAppSelector";
+import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
+
+import { auth } from "@/services/firebase";
 
 export const Home = () => {
   const user = useAppSelector((state) => state.user.userData);

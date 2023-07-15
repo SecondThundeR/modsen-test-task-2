@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { ROUTES } from "../../constants/routes";
+import { ROUTES } from "@/constants/routes";
 
-import { useLogin } from "../../hooks/useLogin";
+import { useLogin } from "@/hooks/useLogin";
 
 export const Login = () => {
   const [email, setEmail] = useState("");

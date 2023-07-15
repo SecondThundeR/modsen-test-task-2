@@ -2,8 +2,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { FormEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { auth } from "../services/firebase";
-import { ROUTES } from "../constants/routes";
+import { ROUTES } from "@/constants/routes";
+
+import { auth } from "@/services/firebase";
 
 export function useLogin(email: string, password: string) {
   const navigate = useNavigate();
