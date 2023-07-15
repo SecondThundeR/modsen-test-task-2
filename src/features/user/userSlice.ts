@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { type User } from "firebase/auth";
 
 export interface UserState {
-  userData: Pick<User, "uid" | "email"> | null;
+  userData: Pick<User, "uid" | "email" | "displayName"> | null;
 }
 
 const initialState: UserState = {
