@@ -16,8 +16,8 @@ export const Home = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) return dispatch(resetUser());
-      const { uid, email } = user;
-      dispatch(setUser({ uid, email }));
+      const { uid, email, displayName } = user;
+      dispatch(setUser({ uid, email, displayName }));
     });
   }, [dispatch]);
 
@@ -37,7 +37,7 @@ export const Home = () => {
 
           <p className="py-6">
             {user
-              ? `You are currently logged in as "${user.email}"`
+              ? `You are currently logged in as "${user.displayName}"`
               : "To continue, please login or signup"}
           </p>
           {user ? (
