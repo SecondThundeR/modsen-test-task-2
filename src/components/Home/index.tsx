@@ -14,9 +14,11 @@ export const Home = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) =>
-      dispatch(user ? setUser(user) : resetUser())
-    );
+    onAuthStateChanged(auth, (user) => {
+      if (!user) return dispatch(resetUser());
+      const { uid, email } = user;
+      dispatch(setUser({ uid, email }));
+    });
   }, [dispatch]);
 
   const handleLogout = useCallback(() => {
@@ -32,12 +34,11 @@ export const Home = () => {
       <div className="hero-content text-center">
         <div className="max-w-md">
           <h1 className="text-5xl font-bold">Hello there!</h1>
+
           <p className="py-6">
-            {user ? (
-              <p>You are currently logged in as "{user.email}"</p>
-            ) : (
-              <p>To continue, please login or signup</p>
-            )}
+            {user
+              ? `You are currently logged in as "${user.email}"`
+              : "To continue, please login or signup"}
           </p>
           {user ? (
             <button className="btn btn-primary" onClick={handleLogout}>
