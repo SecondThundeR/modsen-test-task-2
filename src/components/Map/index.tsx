@@ -1,47 +1,48 @@
+import { LatLng } from "leaflet";
 import { useEffect, useState } from "react";
-import { Placemark, Map as YMap } from "@pbe/react-yandex-maps";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
-const DEFAULT_COORDS = [55.75, 37.57];
+const FALLBACK_LATITUDE = 51.505;
+const FALLBACK_LONGITUDE = -0.09;
 
-export function Map() {
-  const [coords, setCoords] = useState(DEFAULT_COORDS);
+function UserLocation() {
+  const [position, setPosition] = useState<LatLng | null>();
+  const map = useMap();
+
+  map.addEventListener("locationfound", (event) => {
+    setPosition(event.latlng);
+    map.flyTo(event.latlng, map.getZoom());
+  });
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          console.log(`Lat: ${latitude}; Long: ${longitude}`);
-          setCoords([latitude, longitude]);
-        },
-        console.error,
-        {
-          timeout: 5000,
-        }
-      );
-    } else {
-      console.log("Geolocation not supported");
-    }
-  }, []);
+    map.locate({
+      enableHighAccuracy: true,
+      timeout: 10000,
+    });
+  }, [map]);
+
+  if (!position) return null;
 
   return (
-    <YMap
-      defaultState={{
-        center: coords,
-        zoom: 9,
-        controls: ["zoomControl", "fullscreenControl"],
-      }}
-      modules={["control.ZoomControl", "control.FullscreenControl"]}
-      className="h-screen w-full"
+    <Marker position={position}>
+      <Popup>You are currently here!</Popup>
+    </Marker>
+  );
+}
+
+export function Map() {
+  return (
+    <MapContainer
+      center={[FALLBACK_LATITUDE, FALLBACK_LONGITUDE]}
+      zoom={13}
+      scrollWheelZoom={true}
+      className="h-screen w-full z-0"
     >
-      <Placemark
-        modules={["geoObject.addon.balloon"]}
-        defaultGeometry={coords}
-        properties={{
-          balloonContentBody:
-            "This is balloon loaded by the Yandex.Maps API module system",
-        }}
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-    </YMap>
+      <UserLocation />
+    </MapContainer>
   );
 }
