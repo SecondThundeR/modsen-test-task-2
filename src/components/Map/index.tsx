@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { LatLng } from "leaflet";
 import {
   MapContainer,
   Marker,
@@ -21,12 +20,23 @@ const FALLBACK_LATITUDE = 51.505;
 const FALLBACK_LONGITUDE = -0.09;
 
 function MapContents() {
-  const [position, setPosition] = useState<LatLng | null>();
+  const [position, setPosition] = useState({
+    lat: FALLBACK_LATITUDE,
+    lng: FALLBACK_LONGITUDE,
+  });
   const [places, setPlaces] = useState<PlacesProperties>();
   const map = useMap();
 
   map.addEventListener("locationfound", (event) => {
-    setPosition(event.latlng);
+    const { lat, lng } = event.latlng;
+    setPosition({
+      lat,
+      lng,
+    });
+    getCurrentCityID(lat, lng)
+      .then(getCurrentCityPlaces)
+      .then(setPlaces)
+      .catch(console.error);
     map.flyTo(event.latlng, map.getZoom());
   });
 
@@ -36,14 +46,6 @@ function MapContents() {
       timeout: 10000,
     });
   }, [map]);
-
-  useEffect(() => {
-    if (!position) return;
-    getCurrentCityID(position.lat, position.lng)
-      .then(getCurrentCityPlaces)
-      .then(setPlaces)
-      .catch(console.error);
-  }, [position]);
 
   if (!position) return null;
 
@@ -57,7 +59,12 @@ function MapContents() {
       {places?.map((place) => {
         const { lat, lon, name, address_line2, place_id } = place.properties;
         return (
-          <Marker key={place_id} position={[lat, lon]} icon={accommodationIcon}>
+          <Marker
+            key={place_id}
+            position={[lat, lon]}
+            title={name ?? undefined}
+            icon={accommodationIcon}
+          >
             <Popup>{`${name} (${address_line2})`}</Popup>
           </Marker>
         );
