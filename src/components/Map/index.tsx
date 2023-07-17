@@ -65,7 +65,7 @@ function MapContents() {
             title={name ?? undefined}
             icon={accommodationIcon}
           >
-            <Popup>{`${name} (${address_line2})`}</Popup>
+            <Popup>{name ? `${name} (${address_line2})` : address_line2}</Popup>
           </Marker>
         );
       })}
