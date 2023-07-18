@@ -30,7 +30,8 @@
       "@/routes/*": ["src/routes/*"],
       "@/schemas/*": ["src/schemas/*"],
       "@/services/*": ["src/services/*"]
-    }
+    },
+    "types": ["vite-plugin-svgr/client"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
