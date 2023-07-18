@@ -1,5 +1,6 @@
 import { LayerGroup, Marker, Circle, useMapEvent, useMap } from "react-leaflet";
 
+import { COLORS } from "@/constants/leaflet/colors";
 import { userIcon } from "@/constants/leaflet/icons";
 
 import { setLocation } from "@/features/location/locationSlice";
@@ -28,7 +29,21 @@ export function UserLocation() {
   return (
     <LayerGroup>
       <Marker position={locationCoordinates} icon={userIcon} />
-      <Circle center={locationCoordinates} radius={locationRadius} />
+      <Circle
+        center={locationCoordinates}
+        radius={locationRadius}
+        fillColor={COLORS.primary}
+        fillOpacity={0.2}
+        dashArray="20 20"
+        opacity={0.3}
+      />
+      <Circle
+        center={locationCoordinates}
+        radius={locationRadius / 10}
+        fillColor={COLORS.primary}
+        fillOpacity={0.3}
+        stroke={false}
+      />
     </LayerGroup>
   );
 }
