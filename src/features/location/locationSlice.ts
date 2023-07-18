@@ -1,28 +1,42 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const FALLBACK_LATITUDE = 51.505;
-const FALLBACK_LONGITUDE = -0.09;
+import {
+  LONDON_LATITUDE,
+  LONDON_LONGITUDE,
+  DEFAULT_RADIUS_METERS,
+} from "@/constants/leaflet/defaultMapValues";
 
 export interface LocationState {
-  location: {
+  locationCoordinates: {
     lat: number;
-    lon: number;
+    lng: number;
   };
+  locationRadius: number;
 }
 
 const initialState: LocationState = {
-  location: {
-    lat: FALLBACK_LATITUDE,
-    lon: FALLBACK_LONGITUDE,
+  locationCoordinates: {
+    lat: LONDON_LATITUDE,
+    lng: LONDON_LONGITUDE,
   },
+  locationRadius: DEFAULT_RADIUS_METERS,
 };
 
 export const locationSlice = createSlice({
   name: "location",
   initialState,
   reducers: {
-    setLocation: (state, action: PayloadAction<LocationState["location"]>) => {
-      state.location = action.payload;
+    setLocation: (
+      state,
+      action: PayloadAction<LocationState["locationCoordinates"]>
+    ) => {
+      if (
+        state.locationCoordinates.lat === action.payload.lat &&
+        state.locationCoordinates.lng === action.payload.lng
+      )
+        return;
+
+      state.locationCoordinates = action.payload;
     },
   },
 });
