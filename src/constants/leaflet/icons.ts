@@ -1,9 +1,21 @@
-import { icon, divIcon } from "leaflet";
+import { divIcon, icon } from "leaflet";
 
 const PLACE_ICON_CLASSES = "border-4 border-black/20 rounded-full";
 
-export const accommodationIcon = icon({
-  iconUrl: "./src/assets/markerIcons/accommodationIcon.png",
+export const hotelIcon = icon({
+  iconUrl: "./src/assets/markerIcons/hotel.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const bankIcon = icon({
+  iconUrl: "./src/assets/markerIcons/bank.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const coffeeIcon = icon({
+  iconUrl: "./src/assets/markerIcons/coffee.png",
   className: PLACE_ICON_CLASSES,
   iconSize: [40, 40],
 });
