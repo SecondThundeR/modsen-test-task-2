@@ -13,8 +13,7 @@ import { accommodationIcon, userIcon } from "@/constants/leaflet/icons";
 
 import { PlacesProperties } from "@/schemas/geoapify";
 
-import { getCurrentCityID } from "@/services/geoapify/getCurrentCityID";
-import { getCurrentCityPlaces } from "@/services/geoapify/getCurrentCityPlaces";
+import { getLocationPlaces } from "@/services/geoapify/getLocationPlaces";
 
 const FALLBACK_LATITUDE = 51.505;
 const FALLBACK_LONGITUDE = -0.09;
@@ -33,10 +32,7 @@ function MapContents() {
       lat,
       lng,
     });
-    getCurrentCityID(lat, lng)
-      .then(getCurrentCityPlaces)
-      .then(setPlaces)
-      .catch(console.error);
+    getLocationPlaces(lat, lng).then(setPlaces).catch(console.error);
     map.flyTo(event.latlng, map.getZoom());
   });
 
@@ -45,7 +41,7 @@ function MapContents() {
       enableHighAccuracy: true,
       timeout: 10000,
     });
-  }, [map]);
+  }, []);
 
   if (!position) return null;
 
@@ -53,7 +49,7 @@ function MapContents() {
     <>
       <LayerGroup>
         <Marker position={position} icon={userIcon} />
-        <Circle center={position} radius={30} />
+        <Circle center={position} radius={1000} />
       </LayerGroup>
 
       {places?.map((place) => {
@@ -77,7 +73,7 @@ export function Map() {
   return (
     <MapContainer
       center={[FALLBACK_LATITUDE, FALLBACK_LONGITUDE]}
-      zoom={18}
+      zoom={15}
       scrollWheelZoom={true}
       className="h-screen w-full z-0"
     >
