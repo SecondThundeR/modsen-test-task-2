@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
+
+import { MapControls } from "@/components/MapControls";
+import { PlaceMarkerCluster } from "@/components/PlaceMarkerCluster";
+import { UserLocation } from "@/components/UserLocation";
 
 import { DEFAULT_ZOOM } from "@/constants/leaflet/defaultMapValues";
-import { accommodationIcon } from "@/constants/leaflet/icons";
 
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
@@ -10,36 +13,21 @@ import { PlacesProperties } from "@/schemas/geoapify";
 
 import { getLocationPlaces } from "@/services/geoapify/getLocationPlaces";
 
-import { MapControls } from "../MapControls";
-import { UserLocation } from "../UserLocation";
-
-function MapContents() {
-  const { lat, lng } = useAppSelector(
-    (state) => state.location.locationCoordinates
-  );
+function MapPlaces() {
+  const {
+    locationCoordinates: { lat, lng },
+    locationRadius,
+  } = useAppSelector((state) => state.location);
   const [places, setPlaces] = useState<PlacesProperties>();
 
   useEffect(() => {
-    getLocationPlaces(lat, lng).then(setPlaces).catch(console.error);
-  }, [lat, lng]);
+    setPlaces([]);
+    getLocationPlaces(lat, lng, locationRadius)
+      .then(setPlaces)
+      .catch(console.error);
+  }, [lat, lng, locationRadius]);
 
-  return (
-    <>
-      {places?.map((place) => {
-        const { lat, lon, name, address_line2, place_id } = place.properties;
-        return (
-          <Marker
-            key={place_id}
-            position={[lat, lon]}
-            title={name ?? undefined}
-            icon={accommodationIcon}
-          >
-            <Popup>{name ? `${name} (${address_line2})` : address_line2}</Popup>
-          </Marker>
-        );
-      })}
-    </>
-  );
+  return <PlaceMarkerCluster places={places} />;
 }
 
 export function Map() {
@@ -59,7 +47,7 @@ export function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <MapContents />
+      <MapPlaces />
       <UserLocation />
       <MapControls />
     </MapContainer>
