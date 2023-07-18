@@ -1,57 +1,30 @@
 import { useEffect, useState } from "react";
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMap,
-  LayerGroup,
-  Circle,
-} from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
-import { accommodationIcon, userIcon } from "@/constants/leaflet/icons";
+import { DEFAULT_ZOOM } from "@/constants/leaflet/defaultMapValues";
+import { accommodationIcon } from "@/constants/leaflet/icons";
+
+import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
 import { PlacesProperties } from "@/schemas/geoapify";
 
 import { getLocationPlaces } from "@/services/geoapify/getLocationPlaces";
 
-const FALLBACK_LATITUDE = 51.505;
-const FALLBACK_LONGITUDE = -0.09;
+import { MapControls } from "../MapControls";
+import { UserLocation } from "../UserLocation";
 
 function MapContents() {
-  const [position, setPosition] = useState({
-    lat: FALLBACK_LATITUDE,
-    lng: FALLBACK_LONGITUDE,
-  });
+  const { lat, lng } = useAppSelector(
+    (state) => state.location.locationCoordinates
+  );
   const [places, setPlaces] = useState<PlacesProperties>();
-  const map = useMap();
-
-  map.addEventListener("locationfound", (event) => {
-    const { lat, lng } = event.latlng;
-    setPosition({
-      lat,
-      lng,
-    });
-    getLocationPlaces(lat, lng).then(setPlaces).catch(console.error);
-    map.flyTo(event.latlng, map.getZoom());
-  });
 
   useEffect(() => {
-    map.locate({
-      enableHighAccuracy: true,
-      timeout: 10000,
-    });
-  }, []);
-
-  if (!position) return null;
+    getLocationPlaces(lat, lng).then(setPlaces).catch(console.error);
+  }, [lat, lng]);
 
   return (
     <>
-      <LayerGroup>
-        <Marker position={position} icon={userIcon} />
-        <Circle center={position} radius={1000} />
-      </LayerGroup>
-
       {places?.map((place) => {
         const { lat, lon, name, address_line2, place_id } = place.properties;
         return (
@@ -70,11 +43,16 @@ function MapContents() {
 }
 
 export function Map() {
+  const locationCoordinates = useAppSelector(
+    (state) => state.location.locationCoordinates
+  );
+
   return (
     <MapContainer
-      center={[FALLBACK_LATITUDE, FALLBACK_LONGITUDE]}
-      zoom={15}
+      center={locationCoordinates}
+      zoom={DEFAULT_ZOOM}
       scrollWheelZoom={true}
+      zoomControl={false}
       className="h-screen w-full z-0"
     >
       <TileLayer
@@ -82,6 +60,8 @@ export function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <MapContents />
+      <UserLocation />
+      <MapControls />
     </MapContainer>
   );
 }
