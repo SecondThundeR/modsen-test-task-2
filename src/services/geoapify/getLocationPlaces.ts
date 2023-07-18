@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import { categoriesArray } from "@/constants/geoapify/categories";
 import { PLACES_ENDPOINT } from "@/constants/geoapify/links";
 
 import { PlacesSchema } from "@/schemas/geoapify";
@@ -11,15 +12,14 @@ export const getLocationPlaces = async (
 ) => {
   const res = await axios.get(PLACES_ENDPOINT, {
     params: {
-      categories: "accommodation",
+      categories: categoriesArray.join(","),
       filter: `circle:${lon},${lat},${radius}`,
-      limit: 20,
+      limit: 70,
       offset: 0,
       lang: "ru",
       apiKey: import.meta.env.VITE_GEOAPIFY_KEY,
     },
   });
-  console.log(res.request);
   const parsedRes = await PlacesSchema.parseAsync(res.data);
   return parsedRes.features;
 };
