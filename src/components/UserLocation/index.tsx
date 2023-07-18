@@ -8,6 +8,8 @@ import { setLocation } from "@/features/location/locationSlice";
 import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
+import { isRequiredToUpdateCoordinates } from "@/utils/isRequiredToUpdateCoordinates";
+
 export function UserLocation() {
   const { locationCoordinates, locationRadius } = useAppSelector(
     (state) => state.location
@@ -17,6 +19,12 @@ export function UserLocation() {
 
   useMapEvent("locationfound", (event) => {
     const { lat, lng } = event.latlng;
+    if (
+      !isRequiredToUpdateCoordinates(locationCoordinates.lat, lat) ||
+      !isRequiredToUpdateCoordinates(locationCoordinates.lng, lng)
+    )
+      return;
+
     dispatch(
       setLocation({
         lat,
@@ -31,7 +39,7 @@ export function UserLocation() {
       <Marker position={locationCoordinates} icon={userIcon} />
       <Circle
         center={locationCoordinates}
-        radius={locationRadius}
+        radius={locationRadius + 30}
         fillColor={COLORS.primary}
         fillOpacity={0.2}
         dashArray="20 20"
