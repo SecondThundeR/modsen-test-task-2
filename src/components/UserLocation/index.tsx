@@ -8,7 +8,7 @@ import { setLocation } from "@/features/location/locationSlice";
 import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
-import { isRequiredToUpdateCoordinates } from "@/utils/isRequiredToUpdateCoordinates";
+import { isRequiredToUpdate } from "@/utils/coordinates/isRequiredToUpdate";
 
 export function UserLocation() {
   const { locationCoordinates, locationRadius } = useAppSelector(
@@ -20,8 +20,8 @@ export function UserLocation() {
   useMapEvent("locationfound", (event) => {
     const { lat, lng } = event.latlng;
     if (
-      !isRequiredToUpdateCoordinates(locationCoordinates.lat, lat) ||
-      !isRequiredToUpdateCoordinates(locationCoordinates.lng, lng)
+      !isRequiredToUpdate(locationCoordinates.lat, lat) ||
+      !isRequiredToUpdate(locationCoordinates.lng, lng)
     )
       return;
 
