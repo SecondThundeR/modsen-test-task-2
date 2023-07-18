@@ -30,12 +30,6 @@ export const locationSlice = createSlice({
       state,
       action: PayloadAction<LocationState["locationCoordinates"]>
     ) => {
-      if (
-        state.locationCoordinates.lat === action.payload.lat &&
-        state.locationCoordinates.lng === action.payload.lng
-      )
-        return;
-
       state.locationCoordinates = action.payload;
     },
   },
