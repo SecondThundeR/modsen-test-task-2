@@ -10,7 +10,7 @@ import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
 import { isRequiredToUpdate } from "@/utils/coordinates/isRequiredToUpdate";
 
-export function UserLocation() {
+export function MapUserLocation() {
   const { locationCoordinates, locationRadius } = useAppSelector(
     (state) => state.location
   );
