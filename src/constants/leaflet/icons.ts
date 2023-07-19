@@ -20,6 +20,96 @@ export const coffeeIcon = icon({
   iconSize: [40, 40],
 });
 
+export const foodIcon = icon({
+  iconUrl: "./src/assets/markerIcons/food.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const shopIcon = icon({
+  iconUrl: "./src/assets/markerIcons/shop.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const bicycleIcon = icon({
+  iconUrl: "./src/assets/markerIcons/bicycle.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const fuelIcon = icon({
+  iconUrl: "./src/assets/markerIcons/fuel.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const carIcon = icon({
+  iconUrl: "./src/assets/markerIcons/car.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const adultIcon = icon({
+  iconUrl: "./src/assets/markerIcons/adult.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const natureIcon = icon({
+  iconUrl: "./src/assets/markerIcons/nature.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const cultureIcon = icon({
+  iconUrl: "./src/assets/markerIcons/culture.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const historyIcon = icon({
+  iconUrl: "./src/assets/markerIcons/history.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const religionIcon = icon({
+  iconUrl: "./src/assets/markerIcons/religion.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const architectureIcon = icon({
+  iconUrl: "./src/assets/markerIcons/architecture.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const industryIcon = icon({
+  iconUrl: "./src/assets/markerIcons/industry.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const otherIcon = icon({
+  iconUrl: "./src/assets/markerIcons/other.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const entertainmentIcon = icon({
+  iconUrl: "./src/assets/markerIcons/entertainment.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
+export const sportIcon = icon({
+  iconUrl: "./src/assets/markerIcons/sport.png",
+  className: PLACE_ICON_CLASSES,
+  iconSize: [40, 40],
+});
+
 export const userIcon = divIcon({
   html: `
 <svg width="32" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
