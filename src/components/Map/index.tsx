@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 
 import { MapControls } from "@/components/MapControls";
@@ -9,25 +8,9 @@ import { DEFAULT_ZOOM } from "@/constants/leaflet/defaultMapValues";
 
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
-import { PlacesProperties } from "@/schemas/geoapify";
-
-import { getLocationPlaces } from "@/services/geoapify/getLocationPlaces";
-
 function MapPlaces() {
-  const {
-    locationCoordinates: { lat, lng },
-    locationRadius,
-  } = useAppSelector((state) => state.location);
-  const [places, setPlaces] = useState<PlacesProperties>();
-
-  useEffect(() => {
-    setPlaces([]);
-    getLocationPlaces(lat, lng, locationRadius)
-      .then(setPlaces)
-      .catch(console.error);
-  }, [lat, lng, locationRadius]);
-
-  return <PlaceMarkerCluster places={places} />;
+  const places = useAppSelector((state) => state.places);
+  return <PlaceMarkerCluster places={places.features} />;
 }
 
 export function Map() {

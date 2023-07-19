@@ -4,15 +4,21 @@ import { Link } from "react-router-dom";
 
 import { Map } from "@/components/Map";
 
+import { setPlaces } from "@/features/places/placesSlice";
 import { resetUser, setUser } from "@/features/user/userSlice";
 
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
 
+import { getLocationPlaces } from "@/services/geoapify/getLocationPlaces";
 import { auth } from "@/services/firebase";
 
 export const Home = () => {
-  const user = useAppSelector((state) => state.user.userData);
+  const { userData } = useAppSelector((state) => state.user);
+  const {
+    locationCoordinates: { lat, lng },
+    locationRadius,
+  } = useAppSelector((state) => state.location);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -22,6 +28,12 @@ export const Home = () => {
       dispatch(setUser({ uid, email, displayName }));
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    getLocationPlaces(lat, lng, locationRadius)
+      .then((places) => dispatch(setPlaces(places)))
+      .catch(console.error);
+  }, [dispatch, lat, lng, locationRadius]);
 
   const handleLogout = useCallback(() => {
     signOut(auth)
@@ -36,11 +48,11 @@ export const Home = () => {
       <header className="w-1/6 flex flex-col p-4 drop-shadow-2xl z-10 fixed top-0 left-0 bg-base-200 h-full">
         <h1 className="text-2xl font-bold">Hello there!</h1>
         <p className="py-6 flex-grow">
-          {user
-            ? `You are currently logged in as "${user.displayName}"`
+          {userData
+            ? `You are currently logged in as "${userData.displayName}"`
             : "To continue, please login or signup"}
         </p>
-        {user ? (
+        {userData ? (
           <button className="btn btn-primary" onClick={handleLogout}>
             Log out
           </button>
