@@ -1,4 +1,5 @@
 import { memo } from "react";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 import { PlaceMarker } from "@/components/PlaceMarker";
 
@@ -15,7 +16,7 @@ export const PlaceMarkerCluster = memo(function PlaceMarkerCluster({
   places?: PlacesProperties;
 }) {
   return (
-    <>
+    <MarkerClusterGroup chunkedLoading>
       {places?.map((place) => {
         const { categories, place_id, ...rest } = place.properties;
         const placeCategory = categories.find((category) =>
@@ -27,6 +28,6 @@ export const PlaceMarkerCluster = memo(function PlaceMarkerCluster({
 
         return <PlaceMarker key={place_id} icon={categoryIcon} {...rest} />;
       })}
-    </>
+    </MarkerClusterGroup>
   );
 });
