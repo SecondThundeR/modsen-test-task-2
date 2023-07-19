@@ -1,13 +1,5 @@
 import { z } from "zod";
 
-export const GeocodeReverseSchema = z.object({
-  results: z.array(
-    z.object({
-      place_id: z.string(),
-    })
-  ),
-});
-
 const PlaceProperties = z.object({
   lat: z.number(),
   lon: z.number(),
