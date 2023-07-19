@@ -16,7 +16,7 @@ export const PlaceMarkerCluster = memo(function PlaceMarkerCluster({
   places?: PlacesProperties;
 }) {
   return (
-    <MarkerClusterGroup chunkedLoading>
+    <MarkerClusterGroup chunkedLoading maxClusterRadius={50}>
       {places?.map((place) => {
         const { categories, place_id, ...rest } = place.properties;
         const placeCategory = categories.find((category) =>
