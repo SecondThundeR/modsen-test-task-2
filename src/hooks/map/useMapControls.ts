@@ -1,15 +1,19 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { useMap } from "react-leaflet";
+
+import { LocatingStatusContext } from "@/contexts/LocatingStatusContext";
 
 export function useMapControls() {
   const map = useMap();
+  const { isLocating, setIsLocating } = useContext(LocatingStatusContext);
 
   const getLocation = useCallback(() => {
+    setIsLocating(true);
     map.locate({
       enableHighAccuracy: true,
       timeout: 10000,
     });
-  }, [map]);
+  }, [map, setIsLocating]);
 
   const zoomIn = useCallback(() => {
     map.zoomIn(undefined, {
@@ -23,5 +27,5 @@ export function useMapControls() {
     });
   }, [map]);
 
-  return { getLocation, zoomIn, zoomOut };
+  return { getLocation, isLocating, zoomIn, zoomOut };
 }
