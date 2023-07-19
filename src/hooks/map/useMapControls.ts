@@ -1,11 +1,13 @@
 import { useCallback, useContext } from "react";
-import { useMap } from "react-leaflet";
+import { useMap, useMapEvent } from "react-leaflet";
 
 import { LocatingStatusContext } from "@/contexts/LocatingStatusContext";
 
 export function useMapControls() {
   const map = useMap();
   const { isLocating, setIsLocating } = useContext(LocatingStatusContext);
+
+  useMapEvent("locationfound", () => setIsLocating(false));
 
   const getLocation = useCallback(() => {
     setIsLocating(true);

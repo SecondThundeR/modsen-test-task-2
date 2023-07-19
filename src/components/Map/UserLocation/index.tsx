@@ -1,7 +1,4 @@
-import { useContext } from "react";
 import { LayerGroup, Marker, Circle, useMapEvent, useMap } from "react-leaflet";
-
-import { LocatingStatusContext } from "@/contexts/LocatingStatusContext";
 
 import { COLORS } from "@/constants/leaflet/colors";
 import { userIcon } from "@/constants/leaflet/icons";
@@ -19,11 +16,8 @@ export function MapUserLocation() {
   );
   const dispatch = useAppDispatch();
   const map = useMap();
-  const { setIsLocating } = useContext(LocatingStatusContext);
 
   useMapEvent("locationfound", (event) => {
-    setIsLocating(false);
-
     const { lat, lng } = event.latlng;
     if (
       !isRequiredToUpdate(locationCoordinates.lat, lat) ||
