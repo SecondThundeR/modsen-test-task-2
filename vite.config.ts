@@ -20,4 +20,7 @@ export default defineConfig({
       "@/utils": path.resolve(__dirname, "./src/utils"),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 800,
+  },
 });
