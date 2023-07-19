@@ -14,7 +14,7 @@ export const getLocationPlaces = async (
     params: {
       categories: categoriesArray.join(","),
       filter: `circle:${lon},${lat},${radius}`,
-      limit: 70,
+      limit: 100,
       offset: 0,
       lang: "ru",
       apiKey: import.meta.env.VITE_GEOAPIFY_KEY,
