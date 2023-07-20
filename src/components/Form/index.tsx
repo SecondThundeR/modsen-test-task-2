@@ -9,7 +9,7 @@ interface FormProps
 
 const MemoizedForm = memo(function Form({ children, onSubmit }: FormProps) {
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-4">
+    <form onSubmit={onSubmit} className="flex flex-col gap-4 w-full">
       {children}
     </form>
   );
