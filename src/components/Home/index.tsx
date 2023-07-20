@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 
@@ -37,13 +37,13 @@ export const Home = () => {
       .catch(console.error);
   }, [dispatch, lat, lng, locationRadius]);
 
-  const handleLogout = useCallback(() => {
+  const handleLogout = () => {
     signOut(auth)
       .then(() => {
         console.log("Signed out successfully");
       })
       .catch(console.error);
-  }, []);
+  };
 
   return (
     <div className="min-h-screen">
