@@ -3,14 +3,14 @@ import { PLACES_ENDPOINT } from "@/constants/geoapify/links";
 
 import { PlacesSchema } from "@/schemas/geoapify";
 
-import { api } from "@/axios";
+import { fetcher } from "@/services/geoapify/fetcher";
 
 export const getLocationPlaces = async (
   lat: number,
   lon: number,
-  radius: number = 1000
+  radius: number = 1000,
 ) => {
-  const res = await api.get(PLACES_ENDPOINT, {
+  const res = await fetcher.get(PLACES_ENDPOINT, {
     params: {
       categories: categoriesArray.join(","),
       filter: `circle:${lon},${lat},${radius}`,

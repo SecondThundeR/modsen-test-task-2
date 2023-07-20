@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { AlertError } from "@/components/AlertError";
 import { Form } from "@/components/Form";
 
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/constants/router/routes";
 
-import { useSignup } from "@/hooks/useSignup";
+import { useSignup } from "@/hooks/auth/useSignup";
 
 export const Signup = () => {
   const { isLoading, error, onSubmit } = useSignup();

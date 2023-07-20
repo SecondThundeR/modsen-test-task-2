@@ -2,10 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Home } from "@/components/Home";
-import { Signup } from "@/components/Signup";
 import { Login } from "@/components/Login";
+import { Signup } from "@/components/Signup";
 
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/constants/router/routes";
 
 export const router = createBrowserRouter([
   {

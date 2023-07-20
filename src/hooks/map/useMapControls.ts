@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useMap, useMapEvent } from "react-leaflet";
 
 export function useMapControls() {
@@ -28,8 +28,11 @@ export function useMapControls() {
   }, [map]);
 
   return {
-    isLocating, handlers: {
-      getLocation, zoomIn, zoomOut
-    }
+    isLocating,
+    handlers: {
+      getLocation,
+      zoomIn,
+      zoomOut,
+    },
   };
 }

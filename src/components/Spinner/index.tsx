@@ -1,3 +1,3 @@
 export function Spinner() {
-    return <span className="loading loading-spinner loading-md" />
+  return <span className="loading loading-spinner loading-md" />;
 }

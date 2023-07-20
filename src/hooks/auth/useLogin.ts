@@ -1,18 +1,18 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { FormEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/constants/router/routes";
 
-import { auth } from "@/services/firebase";
+import { auth } from "@/services/firebase/app";
 
-export function useSignup() {
+export function useLogin() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   const onSubmit = useCallback(
-    async (event: FormEvent<HTMLFormElement>) => {
+    (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setError(null);
       setIsLoading(true);
@@ -20,19 +20,13 @@ export function useSignup() {
       const formData = new FormData(event.currentTarget);
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
-      const displayName = formData.get("displayName") as string;
 
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((credentials) =>
-          updateProfile(credentials.user, {
-            displayName,
-          })
-        )
+      signInWithEmailAndPassword(auth, email, password)
         .then(() => navigate(ROUTES.home))
         .catch(setError)
         .finally(() => setIsLoading(false));
     },
-    [navigate, setError, setIsLoading]
+    [navigate, setError, setIsLoading],
   );
 
   return { isLoading, error, onSubmit };

@@ -1,19 +1,19 @@
-import { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { Map } from "@/components/Map";
 
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/constants/router/routes";
 
-import { setPlaces } from "@/features/places/placesSlice";
-import { resetUser, setUser } from "@/features/user/userSlice";
-
-import { useAppSelector } from "@/hooks/redux/useAppSelector";
 import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
+import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
+import { auth } from "@/services/firebase/app";
 import { getLocationPlaces } from "@/services/geoapify/getLocationPlaces";
-import { auth } from "@/services/firebase";
+
+import { setPlaces } from "@/store/places";
+import { resetUser, setUser } from "@/store/user";
 
 export const Home = () => {
   const { userData } = useAppSelector((state) => state.user);

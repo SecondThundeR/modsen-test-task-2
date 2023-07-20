@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import {
+  DEFAULT_RADIUS_METERS,
   LONDON_LATITUDE,
   LONDON_LONGITUDE,
-  DEFAULT_RADIUS_METERS,
 } from "@/constants/leaflet/defaultMapValues";
 
 export interface LocationState {
@@ -28,7 +28,7 @@ export const locationSlice = createSlice({
   reducers: {
     setLocation: (
       state,
-      action: PayloadAction<LocationState["locationCoordinates"]>
+      action: PayloadAction<LocationState["locationCoordinates"]>,
     ) => {
       state.locationCoordinates = action.payload;
     },

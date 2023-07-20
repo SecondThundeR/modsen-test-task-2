@@ -10,7 +10,7 @@ import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
 export function Map() {
   const locationCoordinates = useAppSelector(
-    (state) => state.location.locationCoordinates
+    (state) => state.location.locationCoordinates,
   );
 
   return (
