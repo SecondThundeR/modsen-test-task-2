@@ -12,9 +12,11 @@ export const FormInput = memo(function FormInput(props: FormInputProps) {
 
   return (
     <div className="form-control w-full max-w-xs">
-      <label className="label" htmlFor={inputProps.id}>
-        <span className="label-text">{children}</span>
-      </label>
+      {children && (
+        <label className="label" htmlFor={inputProps.id}>
+          <span className="label-text">{children}</span>
+        </label>
+      )}
       <input className="input input-bordered w-full max-w-xs" {...inputProps} />
     </div>
   );
