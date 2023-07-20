@@ -7,10 +7,12 @@ interface AlertErrorProps {
 }
 
 export const AlertError = memo(function AlertError({ error }: AlertErrorProps) {
-  return error ? (
-    <div className="alert alert-error">
-      <XCircleIcon />
-      <span>{error.message}</span>
-    </div>
-  ) : null;
+  return (
+    error && (
+      <div className="alert alert-error">
+        <XCircleIcon />
+        <span>{error.message}</span>
+      </div>
+    )
+  );
 });
