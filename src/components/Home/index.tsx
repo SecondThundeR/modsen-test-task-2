@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { Map } from "@/components/Map";
 
+import { ROUTES } from "@/constants/routes";
+
 import { setPlaces } from "@/features/places/placesSlice";
 import { resetUser, setUser } from "@/features/user/userSlice";
 
@@ -58,10 +60,10 @@ export const Home = () => {
           </button>
         ) : (
           <div className="flex gap-2">
-            <Link to="/login" className="btn btn-primary flex-grow">
+            <Link to={ROUTES.login} className="btn btn-primary flex-grow">
               Login
             </Link>
-            <Link to="/signup" className="btn btn-accent flex-grow">
+            <Link to={ROUTES.signup} className="btn btn-accent flex-grow">
               Signup
             </Link>
           </div>
