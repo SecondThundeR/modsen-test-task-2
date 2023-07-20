@@ -20,7 +20,7 @@ export const PlaceMarkerCluster = memo(function PlaceMarkerCluster({
       {places?.map((place) => {
         const { categories, place_id, ...rest } = place.properties;
         const placeCategory = categories.find((category) =>
-          categoriesArray.includes(category)
+          categoriesArray.includes(category),
         );
         const categoryIcon = placeCategory
           ? categoriesMapping[placeCategory]

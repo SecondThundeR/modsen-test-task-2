@@ -1,18 +1,18 @@
-import { LayerGroup, Marker, Circle, useMapEvent, useMap } from "react-leaflet";
+import { Circle, LayerGroup, Marker, useMap, useMapEvent } from "react-leaflet";
 
 import { COLORS } from "@/constants/leaflet/colors";
 import { userIcon } from "@/constants/leaflet/icons";
 
-import { setLocation } from "@/features/location/locationSlice";
-
 import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
+
+import { setLocation } from "@/store/location";
 
 import { isRequiredToUpdate } from "@/utils/coordinates/isRequiredToUpdate";
 
 export function MapUserLocation() {
   const { locationCoordinates, locationRadius } = useAppSelector(
-    (state) => state.location
+    (state) => state.location,
   );
   const dispatch = useAppDispatch();
   const map = useMap();
@@ -29,7 +29,7 @@ export function MapUserLocation() {
       setLocation({
         lat,
         lng,
-      })
+      }),
     );
     map.flyTo(event.latlng, map.getZoom());
   });

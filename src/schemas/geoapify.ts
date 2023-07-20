@@ -13,7 +13,7 @@ export const PlacesSchema = z.object({
   features: z.array(
     z.object({
       properties: PlaceProperties,
-    })
+    }),
   ),
 });
 

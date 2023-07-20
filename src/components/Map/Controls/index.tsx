@@ -1,25 +1,26 @@
 import { ReactComponent as LocationIcon } from "@/assets/location.svg";
-import { ReactComponent as ZoomPlusIcon } from "@/assets/zoomPlus.svg";
 import { ReactComponent as ZoomMinusIcon } from "@/assets/zoomMinus.svg";
+import { ReactComponent as ZoomPlusIcon } from "@/assets/zoomPlus.svg";
+
+import { Spinner } from "@/components/Spinner";
 
 import { useMapControls } from "@/hooks/map/useMapControls";
 
 export function MapControls() {
-  const { getLocation, isLocating, zoomIn, zoomOut } = useMapControls();
+  const {
+    isLocating,
+    handlers: { getLocation, zoomIn, zoomOut },
+  } = useMapControls();
 
   return (
     <div className="leaflet-bottom leaflet-right">
       <div className="leaflet-control flex gap-2">
         <button
-          className={`btn btn-primary`}
+          className="btn btn-primary"
           onClick={getLocation}
           disabled={isLocating}
         >
-          {isLocating ? (
-            <span className="loading loading-spinner loading-md" />
-          ) : (
-            <LocationIcon />
-          )}
+          {isLocating ? <Spinner /> : <LocationIcon />}
         </button>
         <div>
           <button className="btn btn-accent rounded-r-none" onClick={zoomIn}>

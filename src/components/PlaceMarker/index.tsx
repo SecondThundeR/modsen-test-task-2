@@ -1,5 +1,5 @@
-import { memo } from "react";
 import { type Icon } from "leaflet";
+import { memo } from "react";
 import { Marker, Popup } from "react-leaflet";
 
 import { type PlacePropeties } from "@/schemas/geoapify";
