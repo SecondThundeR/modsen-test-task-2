@@ -1,8 +1,17 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
+import { ReactComponent as BookmarkIcon } from "@/assets/bookmark.svg";
+import { ReactComponent as LoginIcon } from "@/assets/login.svg";
+import { ReactComponent as LogoIcon } from "@/assets/logo.svg";
+import { ReactComponent as LogoutIcon } from "@/assets/logout.svg";
+import { ReactComponent as SearchIcon } from "@/assets/searchIcon.svg";
+
+import { AvatarIcon } from "@/components/AvatarIcon";
 import { Map } from "@/components/Map";
+import { OverlayContainer } from "@/components/OverlayContainer";
+import { Sidebar } from "@/components/Sidebar";
 
 import { ROUTES } from "@/constants/router/routes";
 
@@ -47,28 +56,34 @@ export const Home = () => {
 
   return (
     <div className="min-h-screen">
-      <header className="w-1/6 flex flex-col p-4 drop-shadow-2xl z-10 fixed top-0 left-0 bg-base-200 h-full">
-        <h1 className="text-2xl font-bold">Hello there!</h1>
-        <p className="py-6 flex-grow">
-          {userData
-            ? `You are currently logged in as "${userData.displayName}"`
-            : "To continue, please login or signup"}
-        </p>
-        {userData ? (
-          <button className="btn btn-primary" onClick={handleLogout}>
-            Log out
-          </button>
-        ) : (
-          <div className="flex gap-2">
-            <Link to={ROUTES.login} className="btn btn-primary flex-grow">
-              Login
-            </Link>
-            <Link to={ROUTES.signup} className="btn btn-accent flex-grow">
-              Signup
-            </Link>
-          </div>
-        )}
-      </header>
+      <OverlayContainer>
+        <Sidebar>
+          <Sidebar.Button to={ROUTES.home} unstyled>
+            <LogoIcon />
+          </Sidebar.Button>
+          <Sidebar.ButtonWrapper>
+            <Sidebar.Button to={ROUTES.search}>
+              <SearchIcon />
+            </Sidebar.Button>
+            <Sidebar.Button to={ROUTES.bookmarks}>
+              <BookmarkIcon />
+            </Sidebar.Button>
+          </Sidebar.ButtonWrapper>
+          {userData ? (
+            <>
+              <AvatarIcon displayName={userData.displayName} />
+              <Sidebar.Button onClick={handleLogout}>
+                <LogoutIcon />
+              </Sidebar.Button>
+            </>
+          ) : (
+            <Sidebar.Button to={ROUTES.login}>
+              <LoginIcon />
+            </Sidebar.Button>
+          )}
+        </Sidebar>
+        <Outlet />
+      </OverlayContainer>
       <Map />
     </div>
   );
