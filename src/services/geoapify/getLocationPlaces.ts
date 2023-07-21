@@ -10,6 +10,7 @@ export const getLocationPlaces = async (
   lon: number,
   radius: number = 1000,
   categories: string = "",
+  search: string = "",
 ) => {
   const res = await fetcher.get(PLACES_ENDPOINT, {
     params: {
@@ -17,6 +18,7 @@ export const getLocationPlaces = async (
       filter: `circle:${lon},${lat},${radius}`,
       limit: 100,
       offset: 0,
+      name: search || undefined,
       lang: "ru",
       apiKey: import.meta.env.VITE_GEOAPIFY_KEY,
     },
