@@ -1,12 +1,15 @@
+import cn from "classnames";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import { ReactComponent as BookmarkIcon } from "@/assets/bookmark.svg";
+import { ReactComponent as HideIcon } from "@/assets/hide.svg";
 import { ReactComponent as LoginIcon } from "@/assets/login.svg";
 import { ReactComponent as LogoIcon } from "@/assets/logo.svg";
 import { ReactComponent as LogoutIcon } from "@/assets/logout.svg";
 import { ReactComponent as SearchIcon } from "@/assets/searchIcon.svg";
+import { ReactComponent as ShowIcon } from "@/assets/show.svg";
 
 import { AvatarIcon } from "@/components/AvatarIcon";
 import { Map } from "@/components/Map";
@@ -25,6 +28,7 @@ import { setPlaces } from "@/store/places";
 import { resetUser, setUser } from "@/store/user";
 
 export const Home = () => {
+  const [isHidden, setIsHidden] = useState(false);
   const { userData } = useAppSelector((state) => state.user);
   const {
     locationCoordinates: { lat, lng },
@@ -68,6 +72,13 @@ export const Home = () => {
               <BookmarkIcon />
             </Sidebar.Button>
           </Sidebar.ButtonWrapper>
+          <Sidebar.Button
+            onClick={() => {
+              setIsHidden((prev) => !prev);
+            }}
+          >
+            {isHidden ? <ShowIcon /> : <HideIcon />}
+          </Sidebar.Button>
           {userData ? (
             <>
               <AvatarIcon displayName={userData.displayName} />
@@ -81,7 +92,13 @@ export const Home = () => {
             </Sidebar.Button>
           )}
         </Sidebar>
-        <Outlet />
+        <div
+          className={cn({
+            hidden: isHidden,
+          })}
+        >
+          <Outlet />
+        </div>
       </OverlayContainer>
       <Map />
     </div>
