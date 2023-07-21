@@ -7,7 +7,8 @@ export function useSearch() {
   const search = searchParams.get("q");
   const selectedCategories = searchParams.get("categories");
   const selectedRadius = searchParams.get("radius");
-  const isMissingParams = !search || !selectedCategories || !selectedRadius;
+  const isMissingParams =
+    search === null || selectedCategories === null || selectedRadius === null;
 
   const onSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
