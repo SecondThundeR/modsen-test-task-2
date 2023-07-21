@@ -28,7 +28,6 @@ export const Home = () => {
   const { userData } = useAppSelector((state) => state.user);
   const {
     locationCoordinates: { lat, lng },
-    locationRadius,
   } = useAppSelector((state) => state.location);
   const dispatch = useAppDispatch();
 
@@ -41,10 +40,10 @@ export const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    getLocationPlaces(lat, lng, locationRadius)
+    getLocationPlaces(lat, lng)
       .then((places) => dispatch(setPlaces(places)))
       .catch(console.error);
-  }, [dispatch, lat, lng, locationRadius]);
+  }, [dispatch, lat, lng]);
 
   const handleLogout = () => {
     signOut(auth)

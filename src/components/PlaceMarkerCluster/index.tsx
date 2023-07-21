@@ -11,14 +11,20 @@ import { createIcon } from "@/constants/leaflet/icons";
 
 import { PlacesProperties } from "@/schemas/geoapify";
 
+interface PlaceMarkerClusterProps {
+  places?: PlacesProperties;
+  searchPlaces?: PlacesProperties | null;
+}
+
 export const PlaceMarkerCluster = memo(function PlaceMarkerCluster({
   places,
-}: {
-  places?: PlacesProperties;
-}) {
+  searchPlaces,
+}: PlaceMarkerClusterProps) {
+  const mapPlaces = searchPlaces ?? places;
+
   return (
     <MarkerClusterGroup chunkedLoading maxClusterRadius={50}>
-      {places?.map((place) => {
+      {mapPlaces?.map((place) => {
         const { categories, place_id, ...rest } = place.properties;
         const placeCategory = categories.find((category) =>
           categoriesArray.includes(category),
