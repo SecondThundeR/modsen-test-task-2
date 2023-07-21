@@ -8,7 +8,7 @@ import { ReactComponent as HideIcon } from "@/assets/hide.svg";
 import { ReactComponent as LoginIcon } from "@/assets/login.svg";
 import { ReactComponent as LogoIcon } from "@/assets/logo.svg";
 import { ReactComponent as LogoutIcon } from "@/assets/logout.svg";
-import { ReactComponent as SearchIcon } from "@/assets/searchIcon.svg";
+import { ReactComponent as SearchIcon } from "@/assets/search.svg";
 import { ReactComponent as ShowIcon } from "@/assets/show.svg";
 
 import { AvatarIcon } from "@/components/AvatarIcon";

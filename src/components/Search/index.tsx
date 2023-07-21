@@ -1,4 +1,4 @@
-import { ReactComponent as SearchIcon } from "@/assets/searchIcon.svg";
+import { ReactComponent as SearchIcon } from "@/assets/search.svg";
 
 import { Form } from "@/components/Form";
 

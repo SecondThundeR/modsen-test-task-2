@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-import { ReactComponent as XCircleIcon } from "@/assets/xCircleIcon.svg";
+import { ReactComponent as XCircleIcon } from "@/assets/xCircle.svg";
 
 interface AlertErrorProps {
   error: Error | null;
