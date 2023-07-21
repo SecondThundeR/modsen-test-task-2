@@ -24,7 +24,7 @@ export const PlaceMarkerCluster = memo(function PlaceMarkerCluster({
           categoriesArray.includes(category),
         );
         const categoryIcon = placeCategory
-          ? createIcon(categoriesMapping[placeCategory])
+          ? createIcon(categoriesMapping[placeCategory].url)
           : undefined;
 
         return <PlaceMarker key={place_id} icon={categoryIcon} {...rest} />;
