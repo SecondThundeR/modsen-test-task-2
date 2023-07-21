@@ -1,6 +1,6 @@
 import { divIcon, icon } from "leaflet";
 
-const PLACE_ICON_CLASSES = "border-4 border-black/20 rounded-full";
+export const PLACE_ICON_CLASSES = "border-4 border-black/20 rounded-full";
 
 export const createIcon = (iconUrl: string) =>
   icon({
