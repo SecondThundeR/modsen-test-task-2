@@ -11,11 +11,7 @@ export const FormSubmit = memo(function FormSubmit({
   isLoading,
 }: FormSubmitProps) {
   return (
-    <button
-      type="submit"
-      className="btn btn-primary w-fit"
-      disabled={isLoading}
-    >
+    <button type="submit" className="btn btn-primary" disabled={isLoading}>
       {isLoading && <Spinner />}
       {children}
     </button>
