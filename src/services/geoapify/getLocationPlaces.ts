@@ -9,10 +9,11 @@ export const getLocationPlaces = async (
   lat: number,
   lon: number,
   radius: number = 1000,
+  categories: string = "",
 ) => {
   const res = await fetcher.get(PLACES_ENDPOINT, {
     params: {
-      categories: categoriesArray.join(","),
+      categories: !categories ? categoriesArray.join(",") : categories,
       filter: `circle:${lon},${lat},${radius}`,
       limit: 100,
       offset: 0,
