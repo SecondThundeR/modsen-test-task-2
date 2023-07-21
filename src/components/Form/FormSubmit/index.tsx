@@ -3,12 +3,12 @@ import { PropsWithChildren, memo } from "react";
 import { Spinner } from "@/components/Spinner";
 
 interface FormSubmitProps extends PropsWithChildren {
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 export const FormSubmit = memo(function FormSubmit({
   children,
-  isLoading,
+  isLoading = false,
 }: FormSubmitProps) {
   return (
     <button type="submit" className="btn btn-primary" disabled={isLoading}>
