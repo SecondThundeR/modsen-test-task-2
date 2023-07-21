@@ -11,8 +11,8 @@ export const Signup = () => {
   const { isLoading, error, onSubmit } = useSignup();
 
   return (
-    <div className="flex flex-col gap-4 m-4">
-      <h1 className="text-2xl text-bold">Signup</h1>
+    <div className="flex flex-col gap-4 w-full px-4 sm:w-1/2 lg:w-2/6 h-screen mx-auto items-center justify-center">
+      <h1 className="text-3xl font-bold">Signup</h1>
       <AlertError error={error} />
       <Form onSubmit={onSubmit}>
         <Form.Input
@@ -43,8 +43,13 @@ export const Signup = () => {
       </Form>
       <p>
         Already have an account?{" "}
-        <Link to={ROUTES.login} className="link link-accent">
+        <Link to={ROUTES.login} className="link link-primary">
           Login
+        </Link>
+      </p>
+      <p>
+        <Link to={ROUTES.home} className="link link-primary">
+          Go home
         </Link>
       </p>
     </div>
