@@ -1,5 +1,3 @@
-import { Icon } from "leaflet";
-
 import {
   adultIcon,
   architectureIcon,
@@ -21,7 +19,7 @@ import {
   sportIcon,
 } from "@/constants/leaflet/icons";
 
-export const categoriesMapping: Record<string, Icon> = {
+export const categoriesMapping: Record<string, string> = {
   accommodation: hotelIcon,
   "service.financial.bank": bankIcon,
   "catering.cafe.coffee": coffeeIcon,

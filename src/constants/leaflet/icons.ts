@@ -2,113 +2,48 @@ import { divIcon, icon } from "leaflet";
 
 const PLACE_ICON_CLASSES = "border-4 border-black/20 rounded-full";
 
-export const hotelIcon = icon({
-  iconUrl: "./src/assets/markerIcons/hotel.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const createIcon = (iconUrl: string) =>
+  icon({
+    iconUrl,
+    className: PLACE_ICON_CLASSES,
+    iconSize: [40, 40],
+  });
 
-export const bankIcon = icon({
-  iconUrl: "./src/assets/markerIcons/bank.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const hotelIcon = "./src/assets/markerIcons/hotel.png";
 
-export const coffeeIcon = icon({
-  iconUrl: "./src/assets/markerIcons/coffee.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const bankIcon = "./src/assets/markerIcons/bank.png";
 
-export const foodIcon = icon({
-  iconUrl: "./src/assets/markerIcons/food.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const coffeeIcon = "./src/assets/markerIcons/coffee.png";
 
-export const shopIcon = icon({
-  iconUrl: "./src/assets/markerIcons/shop.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const foodIcon = "./src/assets/markerIcons/food.png";
 
-export const bicycleIcon = icon({
-  iconUrl: "./src/assets/markerIcons/bicycle.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const shopIcon = "./src/assets/markerIcons/shop.png";
 
-export const fuelIcon = icon({
-  iconUrl: "./src/assets/markerIcons/fuel.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const bicycleIcon = "./src/assets/markerIcons/bicycle.png";
 
-export const carIcon = icon({
-  iconUrl: "./src/assets/markerIcons/car.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const fuelIcon = "./src/assets/markerIcons/fuel.png";
 
-export const adultIcon = icon({
-  iconUrl: "./src/assets/markerIcons/adult.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const carIcon = "./src/assets/markerIcons/car.png";
 
-export const natureIcon = icon({
-  iconUrl: "./src/assets/markerIcons/nature.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const adultIcon = "./src/assets/markerIcons/adult.png";
 
-export const cultureIcon = icon({
-  iconUrl: "./src/assets/markerIcons/culture.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const natureIcon = "./src/assets/markerIcons/nature.png";
 
-export const historyIcon = icon({
-  iconUrl: "./src/assets/markerIcons/history.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const cultureIcon = "./src/assets/markerIcons/culture.png";
 
-export const religionIcon = icon({
-  iconUrl: "./src/assets/markerIcons/religion.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const historyIcon = "./src/assets/markerIcons/history.png";
 
-export const architectureIcon = icon({
-  iconUrl: "./src/assets/markerIcons/architecture.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const religionIcon = "./src/assets/markerIcons/religion.png";
 
-export const industryIcon = icon({
-  iconUrl: "./src/assets/markerIcons/industry.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const architectureIcon = "./src/assets/markerIcons/architecture.png";
 
-export const otherIcon = icon({
-  iconUrl: "./src/assets/markerIcons/other.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const industryIcon = "./src/assets/markerIcons/industry.png";
 
-export const entertainmentIcon = icon({
-  iconUrl: "./src/assets/markerIcons/entertainment.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const otherIcon = "./src/assets/markerIcons/other.png";
 
-export const sportIcon = icon({
-  iconUrl: "./src/assets/markerIcons/sport.png",
-  className: PLACE_ICON_CLASSES,
-  iconSize: [40, 40],
-});
+export const entertainmentIcon = "./src/assets/markerIcons/entertainment.png";
+
+export const sportIcon = "./src/assets/markerIcons/sport.png";
 
 export const userIcon = divIcon({
   html: `

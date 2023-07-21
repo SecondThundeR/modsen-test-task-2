@@ -7,6 +7,7 @@ import {
   categoriesArray,
   categoriesMapping,
 } from "@/constants/geoapify/categories";
+import { createIcon } from "@/constants/leaflet/icons";
 
 import { PlacesProperties } from "@/schemas/geoapify";
 
@@ -23,7 +24,7 @@ export const PlaceMarkerCluster = memo(function PlaceMarkerCluster({
           categoriesArray.includes(category),
         );
         const categoryIcon = placeCategory
-          ? categoriesMapping[placeCategory]
+          ? createIcon(categoriesMapping[placeCategory])
           : undefined;
 
         return <PlaceMarker key={place_id} icon={categoryIcon} {...rest} />;
