@@ -4,10 +4,12 @@ import { PlacesProperties } from "@/schemas/geoapify";
 
 export interface PlacesState {
   features: PlacesProperties;
+  searchFeatures: PlacesProperties | null;
 }
 
 const initialState: PlacesState = {
   features: [],
+  searchFeatures: null,
 };
 
 export const placesSlice = createSlice({
@@ -17,9 +19,19 @@ export const placesSlice = createSlice({
     setPlaces: (state, action: PayloadAction<PlacesState["features"]>) => {
       state.features = action.payload;
     },
+    setSearchPlaces: (
+      state,
+      action: PayloadAction<PlacesState["searchFeatures"]>,
+    ) => {
+      state.searchFeatures = action.payload;
+    },
+    resetSearchPlaces: (state) => {
+      state.searchFeatures = null;
+    },
   },
 });
 
-export const { setPlaces } = placesSlice.actions;
+export const { setPlaces, setSearchPlaces, resetSearchPlaces } =
+  placesSlice.actions;
 
 export default placesSlice.reducer;

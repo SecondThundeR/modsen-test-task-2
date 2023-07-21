@@ -32,9 +32,18 @@ export const locationSlice = createSlice({
     ) => {
       state.locationCoordinates = action.payload;
     },
+    setRadius: (
+      state,
+      action: PayloadAction<LocationState["locationRadius"]>,
+    ) => {
+      state.locationRadius = action.payload;
+    },
+    resetRadius: (state) => {
+      state.locationRadius = DEFAULT_RADIUS_METERS;
+    },
   },
 });
 
-export const { setLocation } = locationSlice.actions;
+export const { setLocation, setRadius, resetRadius } = locationSlice.actions;
 
 export default locationSlice.reducer;
