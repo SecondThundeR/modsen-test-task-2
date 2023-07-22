@@ -19,7 +19,7 @@ export function FormCategorySelect() {
   };
 
   return (
-    <div className="px-3 py-2 border-2 form-control border-[#c4c4c4] rounded-xl gap-2 max-h-96 overflow-auto">
+    <div className="form-control max-h-96 gap-2 overflow-auto rounded-xl border-2 border-[#c4c4c4] px-3 py-2">
       <input
         id="categories"
         name="categories"
@@ -32,7 +32,7 @@ export function FormCategorySelect() {
         return (
           <div
             key={category}
-            className={cn("flex gap-4 items-center", {
+            className={cn("flex items-center gap-4", {
               "opacity-50 hover:opacity-70": !isSelected,
               "hover:opacity-80": isSelected,
             })}

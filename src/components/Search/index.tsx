@@ -12,14 +12,14 @@ export function Search() {
   if (!isMissingParams) return <SearchResults />;
 
   return (
-    <div className="bg-base-300 h-full w-80 p-4 flex flex-col items-center gap-3">
+    <div className="flex h-full w-80 flex-col items-center gap-3 bg-base-300 p-4">
       <Form onSubmit={onSubmit} fullHeight>
         <Form.Input name="q" type="text" placeholder="Enter place to search" />
-        <div className="flex flex-col gap-3 flex-grow">
+        <div className="flex flex-grow flex-col gap-3">
           <h1 className="font-bold">Selected categories:</h1>
           <Form.CategorySelect />
           <h1 className="font-bold">Within radius:</h1>
-          <div className="flex gap-3 items-center">
+          <div className="flex items-center gap-3">
             <Form.Input
               name="radius"
               type="number"

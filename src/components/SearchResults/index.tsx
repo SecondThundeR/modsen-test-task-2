@@ -55,12 +55,12 @@ export function SearchResults() {
   };
 
   return (
-    <div className="bg-base-300 h-full w-80 p-4 flex flex-col items-center gap-3 overflow-auto">
+    <div className="flex h-full w-80 flex-col items-center gap-3 overflow-auto bg-base-300 p-4">
       {isLoading ? (
         <Spinner />
       ) : (
         <>
-          <button className="link link-primary link-hover" onClick={onBack}>
+          <button className="link-hover link-primary link" onClick={onBack}>
             Go back
           </button>
           {searchPlaces?.map((place) => (

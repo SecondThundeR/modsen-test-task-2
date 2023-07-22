@@ -5,7 +5,7 @@ import { SidebarButtonWrapper } from "@/components/Sidebar/SidebarButtonWrapper"
 
 const MemoizedSidebar = memo(function Sidebar({ children }: PropsWithChildren) {
   return (
-    <div className="h-full flex flex-col items-center gap-4 px-2 py-4">
+    <div className="flex h-full flex-col items-center gap-4 px-2 py-4">
       {children}
     </div>
   );

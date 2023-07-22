@@ -12,7 +12,7 @@ export const SearchCard = memo(function SearchCard({
   address_line2,
 }: SearchCardProps) {
   return (
-    <div className="bg-base-100 flex w-full flex-col gap-2 p-4 rounded-xl hover:drop-shadow-lg transition-all duration-300">
+    <div className="flex w-full flex-col gap-2 rounded-xl bg-base-100 p-4 transition-all duration-300 hover:drop-shadow-lg">
       <div className="flex gap-2">
         {categories.map((category) => (
           <CategoryIcons key={category} category={category} />

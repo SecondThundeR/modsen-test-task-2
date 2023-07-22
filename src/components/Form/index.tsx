@@ -19,7 +19,7 @@ const MemoizedForm = memo(function Form({
   return (
     <form
       onSubmit={onSubmit}
-      className={cn("flex flex-col gap-4 w-full", {
+      className={cn("flex w-full flex-col gap-4", {
         "h-full": fullHeight,
       })}
     >

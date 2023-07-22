@@ -11,7 +11,7 @@ export const AvatarIcon = memo(function AvatarIcon({
 }: AvatarIconProps) {
   return (
     <div className="avatar placeholder">
-      <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
+      <div className="w-12 rounded-full bg-neutral-focus text-neutral-content">
         {!displayName ? (
           <AccountIcon />
         ) : (
