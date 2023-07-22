@@ -19,12 +19,12 @@ import {
   sportIcon,
 } from "@/constants/leaflet/icons";
 
-type categoryInfo = {
+interface CategoryInfo {
   url: string;
   name: string;
-};
+}
 
-export const categoriesMapping: Record<string, categoryInfo> = {
+export const categoriesMapping: Record<string, CategoryInfo> = {
   accommodation: {
     url: hotelIcon,
     name: "Место для сна",
