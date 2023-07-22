@@ -10,7 +10,7 @@ import { PLACE_ICON_CLASSES } from "@/constants/leaflet/icons";
 export function FormCategorySelect() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-  const onClick = (category: string) => {
+  const onCategorySelect = (category: string) => {
     setSelectedCategories((prev) => {
       if (prev.includes(category))
         return prev.filter((cat) => cat !== category);
@@ -29,6 +29,7 @@ export function FormCategorySelect() {
       {categoriesArray.map((category) => {
         const categoryData = categoriesMapping[category];
         const isSelected = selectedCategories.includes(category);
+
         return (
           <div
             key={category}
@@ -36,7 +37,7 @@ export function FormCategorySelect() {
               "opacity-50 hover:opacity-70": !isSelected,
               "hover:opacity-80": isSelected,
             })}
-            onClick={() => onClick(category)}
+            onClick={() => onCategorySelect(category)}
           >
             <img
               width={40}

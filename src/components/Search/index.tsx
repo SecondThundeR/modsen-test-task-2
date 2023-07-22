@@ -1,10 +1,9 @@
 import { ReactComponent as SearchIcon } from "@/assets/search.svg";
 
 import { Form } from "@/components/Form";
+import { SearchResults } from "@/components/SearchResults";
 
 import { useSearch } from "@/hooks/search/useSearch";
-
-import { SearchResults } from "../SearchResults";
 
 export function Search() {
   const { isMissingParams, onSubmit } = useSearch();
