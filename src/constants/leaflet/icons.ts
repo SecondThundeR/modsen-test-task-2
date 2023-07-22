@@ -9,41 +9,41 @@ export const createIcon = (iconUrl: string) =>
     iconSize: [40, 40],
   });
 
-export const hotelIcon = "./src/assets/markerIcons/hotel.png";
+export const hotelIcon = "/markerIcons/hotel.png";
 
-export const bankIcon = "./src/assets/markerIcons/bank.png";
+export const bankIcon = "/markerIcons/bank.png";
 
-export const coffeeIcon = "./src/assets/markerIcons/coffee.png";
+export const coffeeIcon = "/markerIcons/coffee.png";
 
-export const foodIcon = "./src/assets/markerIcons/food.png";
+export const foodIcon = "/markerIcons/food.png";
 
-export const shopIcon = "./src/assets/markerIcons/shop.png";
+export const shopIcon = "/markerIcons/shop.png";
 
-export const bicycleIcon = "./src/assets/markerIcons/bicycle.png";
+export const bicycleIcon = "/markerIcons/bicycle.png";
 
-export const fuelIcon = "./src/assets/markerIcons/fuel.png";
+export const fuelIcon = "/markerIcons/fuel.png";
 
-export const carIcon = "./src/assets/markerIcons/car.png";
+export const carIcon = "/markerIcons/car.png";
 
-export const adultIcon = "./src/assets/markerIcons/adult.png";
+export const adultIcon = "/markerIcons/adult.png";
 
-export const natureIcon = "./src/assets/markerIcons/nature.png";
+export const natureIcon = "/markerIcons/nature.png";
 
-export const cultureIcon = "./src/assets/markerIcons/culture.png";
+export const cultureIcon = "/markerIcons/culture.png";
 
-export const historyIcon = "./src/assets/markerIcons/history.png";
+export const historyIcon = "/markerIcons/history.png";
 
-export const religionIcon = "./src/assets/markerIcons/religion.png";
+export const religionIcon = "/markerIcons/religion.png";
 
-export const architectureIcon = "./src/assets/markerIcons/architecture.png";
+export const architectureIcon = "/markerIcons/architecture.png";
 
-export const industryIcon = "./src/assets/markerIcons/industry.png";
+export const industryIcon = "/markerIcons/industry.png";
 
-export const otherIcon = "./src/assets/markerIcons/other.png";
+export const otherIcon = "/markerIcons/other.png";
 
-export const entertainmentIcon = "./src/assets/markerIcons/entertainment.png";
+export const entertainmentIcon = "/markerIcons/entertainment.png";
 
-export const sportIcon = "./src/assets/markerIcons/sport.png";
+export const sportIcon = "/markerIcons/sport.png";
 
 export const userIcon = divIcon({
   html: `
