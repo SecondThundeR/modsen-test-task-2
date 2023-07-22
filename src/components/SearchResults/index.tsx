@@ -12,6 +12,7 @@ import { getLocationPlaces } from "@/services/geoapify/getLocationPlaces";
 import { resetRadius, setRadius } from "@/store/location";
 import { resetSearchPlaces, setSearchPlaces } from "@/store/places";
 
+import { SearchCard } from "../SearchCard";
 import { Spinner } from "../Spinner";
 
 export function SearchResults() {
@@ -62,21 +63,9 @@ export function SearchResults() {
           <button className="link link-primary link-hover" onClick={onBack}>
             Go back
           </button>
-          {searchPlaces?.map((place) => {
-            const { lat, lon, place_id, name, address_line2, categories } =
-              place.properties;
-            return (
-              <div key={place_id} className="bg-base-100 p-4 rounded-xl">
-                <h1 className="font-bold">{name}</h1>
-                <p className="opacity-80">{address_line2}</p>
-                <div className="divider"></div>
-                <p>Categories: {categories.join(", ")}</p>
-                <p>
-                  Coordinates: {lat}; {lon}
-                </p>
-              </div>
-            );
-          })}
+          {searchPlaces?.map((place) => (
+            <SearchCard key={place.properties.place_id} {...place.properties} />
+          ))}
         </>
       )}
     </div>
