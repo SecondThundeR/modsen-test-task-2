@@ -24,7 +24,7 @@ export function SearchResults() {
   const {
     locationCoordinates: { lat, lng },
   } = useAppSelector((state) => state.location);
-  const { searchFeatures } = useAppSelector((state) => state.places);
+  const { searchPlaces } = useAppSelector((state) => state.places);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -62,9 +62,9 @@ export function SearchResults() {
           <button className="link link-primary link-hover" onClick={onBack}>
             Go back
           </button>
-          {searchFeatures?.map((feature) => {
+          {searchPlaces?.map((place) => {
             const { lat, lon, place_id, name, address_line2, categories } =
-              feature.properties;
+              place.properties;
             return (
               <div key={place_id} className="bg-base-100 p-4 rounded-xl">
                 <h1 className="font-bold">{name}</h1>

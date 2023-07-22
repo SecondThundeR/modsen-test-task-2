@@ -1,32 +1,32 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { PlacesProperties } from "@/schemas/geoapify";
+import { Places } from "@/schemas/geoapify";
 
 export interface PlacesState {
-  features: PlacesProperties;
-  searchFeatures: PlacesProperties | null;
+  places: Places;
+  searchPlaces: Places | null;
 }
 
 const initialState: PlacesState = {
-  features: [],
-  searchFeatures: null,
+  places: [],
+  searchPlaces: null,
 };
 
 export const placesSlice = createSlice({
   name: "places",
   initialState,
   reducers: {
-    setPlaces: (state, action: PayloadAction<PlacesState["features"]>) => {
-      state.features = action.payload;
+    setPlaces: (state, action: PayloadAction<PlacesState["places"]>) => {
+      state.places = action.payload;
     },
     setSearchPlaces: (
       state,
-      action: PayloadAction<PlacesState["searchFeatures"]>,
+      action: PayloadAction<PlacesState["searchPlaces"]>,
     ) => {
-      state.searchFeatures = action.payload;
+      state.searchPlaces = action.payload;
     },
     resetSearchPlaces: (state) => {
-      state.searchFeatures = null;
+      state.searchPlaces = null;
     },
   },
 });

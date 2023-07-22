@@ -9,12 +9,9 @@ import {
 } from "@/constants/geoapify/categories";
 import { createIcon } from "@/constants/leaflet/icons";
 
-import { PlacesProperties } from "@/schemas/geoapify";
+import { PlacesState } from "@/store/places";
 
-interface PlaceMarkerClusterProps {
-  places?: PlacesProperties;
-  searchPlaces?: PlacesProperties | null;
-}
+interface PlaceMarkerClusterProps extends PlacesState {}
 
 export const PlaceMarkerCluster = memo(function PlaceMarkerCluster({
   places,

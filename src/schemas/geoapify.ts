@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const PlaceProperties = z.object({
+const PlacesPropertiesSchema = z.object({
   lat: z.number(),
   lon: z.number(),
   name: z.string().nullish(),
@@ -12,10 +12,33 @@ const PlaceProperties = z.object({
 export const PlacesSchema = z.object({
   features: z.array(
     z.object({
-      properties: PlaceProperties,
+      properties: PlacesPropertiesSchema,
     }),
   ),
 });
 
-export type PlacePropeties = z.infer<typeof PlaceProperties>;
-export type PlacesProperties = z.infer<typeof PlacesSchema>["features"];
+const PlaceDetailsPropertiesSchema = PlacesPropertiesSchema.merge(
+  z.object({
+    website: z.string(),
+    description: z.string(),
+    contact: z.object({
+      phone: z.string(),
+    }),
+  }),
+);
+
+export const PlaceDetailsSchema = z.object({
+  features: z.array(
+    z.object({
+      properties: PlaceDetailsPropertiesSchema,
+    }),
+  ),
+});
+
+export type PlacesPropeties = z.infer<typeof PlacesPropertiesSchema>;
+export type Places = z.infer<typeof PlacesSchema>["features"];
+
+export type PlaceDetailsPropeties = z.infer<
+  typeof PlaceDetailsPropertiesSchema
+>;
+export type PlaceDetails = z.infer<typeof PlaceDetailsSchema>["features"];

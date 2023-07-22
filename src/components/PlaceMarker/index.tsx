@@ -2,10 +2,10 @@ import { type Icon } from "leaflet";
 import { memo } from "react";
 import { Marker, Popup } from "react-leaflet";
 
-import { type PlacePropeties } from "@/schemas/geoapify";
+import { type PlacesPropeties } from "@/schemas/geoapify";
 
 interface PlaceMarkerProperties
-  extends Pick<PlacePropeties, "lat" | "lon" | "name" | "address_line2"> {
+  extends Omit<PlacesPropeties, "place_id" | "categories"> {
   icon?: Icon;
 }
 
