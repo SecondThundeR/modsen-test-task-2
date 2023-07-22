@@ -12,11 +12,7 @@ export const AvatarIcon = memo(function AvatarIcon({
   return (
     <div className="avatar placeholder">
       <div className="w-12 rounded-full bg-neutral-focus text-neutral-content">
-        {!displayName ? (
-          <AccountIcon />
-        ) : (
-          <span>{displayName.length > 0 ? displayName[0] : "?"}</span>
-        )}
+        {!displayName ? <AccountIcon /> : <span>{displayName[0] ?? "?"}</span>}
       </div>
     </div>
   );
