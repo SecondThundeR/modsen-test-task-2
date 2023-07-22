@@ -16,9 +16,10 @@ export const CategoryIcons = memo(function CategoryIcons({
       <img
         width={36}
         height={36}
-        className="border-4 border-base-100 -mr-4 rounded-full"
+        className="-mr-4 rounded-full border-4 border-base-100"
         src={categoryInfo.url}
         alt={categoryInfo.name}
+        title={categoryInfo.name}
       />
     )
   );

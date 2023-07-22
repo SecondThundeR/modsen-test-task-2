@@ -42,6 +42,8 @@ export function FormCategorySelect() {
               width={40}
               height={40}
               src={categoryData.url}
+              title={categoryData.name}
+              alt={categoryData.name}
               className={PLACE_ICON_CLASSES}
             />
             <span className="font-medium">{categoryData.name}</span>
