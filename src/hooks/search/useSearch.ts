@@ -15,9 +15,9 @@ export function useSearch() {
       event.preventDefault();
 
       const formData = new FormData(event.currentTarget);
-      const q = formData.get("q") as string;
-      const categories = formData.get("categories") as string;
-      const radius = formData.get("radius") as string;
+      const q = (formData.get("q") ?? "") as string;
+      const categories = (formData.get("categories") ?? "") as string;
+      const radius = (formData.get("radius") ?? "1") as string;
 
       setSearchParams({
         q,
