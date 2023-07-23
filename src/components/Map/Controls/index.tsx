@@ -1,4 +1,5 @@
 import { ReactComponent as LocationIcon } from "@/assets/location.svg";
+import { ReactComponent as XCircleIcon } from "@/assets/xCircle.svg";
 import { ReactComponent as ZoomMinusIcon } from "@/assets/zoomMinus.svg";
 import { ReactComponent as ZoomPlusIcon } from "@/assets/zoomPlus.svg";
 
@@ -9,6 +10,7 @@ import { useMapControls } from "@/hooks/map/useMapControls";
 export function MapControls() {
   const {
     isLocating,
+    isFailed,
     handlers: { getLocation, zoomIn, zoomOut },
   } = useMapControls();
 
@@ -20,7 +22,13 @@ export function MapControls() {
           onClick={getLocation}
           disabled={isLocating}
         >
-          {isLocating ? <Spinner /> : <LocationIcon />}
+          {isFailed ? (
+            <XCircleIcon />
+          ) : isLocating ? (
+            <Spinner />
+          ) : (
+            <LocationIcon />
+          )}
         </button>
         <div>
           <button className="btn btn-accent rounded-r-none" onClick={zoomIn}>
