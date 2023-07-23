@@ -5,6 +5,26 @@ import { PlacesSchema } from "@/schemas/geoapify";
 
 import { fetcher } from "@/services/geoapify/fetcher";
 
+import { parseResponse } from "@/utils/zod/parseResponse";
+
+const buildParams = (
+  lat: number,
+  lon: number,
+  radius: number,
+  categories: string,
+  search: string,
+) => {
+  return {
+    categories: !categories ? categoriesArray.join(",") : categories,
+    filter: `circle:${lon},${lat},${radius}`,
+    limit: 100,
+    offset: 0,
+    name: search || undefined,
+    lang: "ru",
+    apiKey: import.meta.env.VITE_GEOAPIFY_KEY,
+  };
+};
+
 export const getLocationPlaces = async (
   lat: number,
   lon: number,
@@ -12,17 +32,7 @@ export const getLocationPlaces = async (
   categories: string = "",
   search: string = "",
 ) => {
-  const res = await fetcher.get(PLACES_ENDPOINT, {
-    params: {
-      categories: !categories ? categoriesArray.join(",") : categories,
-      filter: `circle:${lon},${lat},${radius}`,
-      limit: 100,
-      offset: 0,
-      name: search || undefined,
-      lang: "ru",
-      apiKey: import.meta.env.VITE_GEOAPIFY_KEY,
-    },
-  });
-  const parsedRes = await PlacesSchema.parseAsync(res.data);
-  return parsedRes.features;
+  const params = buildParams(lat, lon, radius, categories, search);
+  const res = await fetcher.get(PLACES_ENDPOINT, { params });
+  return (await parseResponse(res.data, PlacesSchema)).features;
 };
