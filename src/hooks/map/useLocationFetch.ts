@@ -16,6 +16,7 @@ export function useLocationFetch() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    setIsLoading(true);
     getLocationPlaces(lat, lng)
       .then((places) => dispatch(setPlaces(places)))
       .catch((error) => setError(error))

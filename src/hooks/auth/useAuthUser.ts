@@ -15,7 +15,12 @@ export function useAuthUser() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) return dispatch(resetUser());
+      setIsFetching(true);
+      if (!user) {
+        setIsFetching(false);
+        dispatch(resetUser());
+        return;
+      }
       const { uid, email, displayName } = user;
       dispatch(setUser({ uid, email, displayName }));
       setIsFetching(false);
