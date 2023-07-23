@@ -1,6 +1,5 @@
 import cn from "classnames";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import { ReactComponent as BookmarkIcon } from "@/assets/bookmark.svg";
@@ -15,47 +14,15 @@ import { AvatarIcon } from "@/components/AvatarIcon";
 import { Map } from "@/components/Map";
 import { OverlayContainer } from "@/components/OverlayContainer";
 import { Sidebar } from "@/components/Sidebar";
+import { Spinner } from "@/components/Spinner";
 
 import { ROUTES } from "@/constants/router/routes";
 
-import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
-import { useAppSelector } from "@/hooks/redux/useAppSelector";
-
-import { auth } from "@/services/firebase/app";
-import { getLocationPlaces } from "@/services/geoapify/getLocationPlaces";
-
-import { setPlaces } from "@/store/places";
-import { resetUser, setUser } from "@/store/user";
+import { useAuthUser } from "@/hooks/auth/useAuthUser";
 
 export const Home = () => {
   const [isHidden, setIsHidden] = useState(false);
-  const { userData } = useAppSelector((state) => state.user);
-  const {
-    locationCoordinates: { lat, lng },
-  } = useAppSelector((state) => state.location);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user) return dispatch(resetUser());
-      const { uid, email, displayName } = user;
-      dispatch(setUser({ uid, email, displayName }));
-    });
-  }, [dispatch]);
-
-  useEffect(() => {
-    getLocationPlaces(lat, lng)
-      .then((places) => dispatch(setPlaces(places)))
-      .catch(console.error);
-  }, [dispatch, lat, lng]);
-
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Signed out successfully");
-      })
-      .catch(console.error);
-  };
+  const { userData, isFetching, handleLogout } = useAuthUser();
 
   return (
     <div className="min-h-screen">
@@ -79,7 +46,9 @@ export const Home = () => {
           >
             {isHidden ? <ShowIcon /> : <HideIcon />}
           </Sidebar.Button>
-          {userData ? (
+          {isFetching ? (
+            <Spinner />
+          ) : userData ? (
             <>
               <AvatarIcon displayName={userData.displayName} />
               <Sidebar.Button onClick={handleLogout}>
