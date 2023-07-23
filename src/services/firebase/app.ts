@@ -1,5 +1,6 @@
-import { initializeApp } from "firebase/app";
+import { FirebaseOptions, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 const FIREBASE_CONFIG = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -8,10 +9,12 @@ const FIREBASE_CONFIG = {
   storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_APP_ID,
-} as const;
+  databaseURL: import.meta.env.VITE_APP_DB_URL,
+} satisfies FirebaseOptions;
 
 const firebaseApp = initializeApp(FIREBASE_CONFIG);
 
 export const auth = getAuth(firebaseApp);
+export const database = getDatabase(firebaseApp);
 
 export default firebaseApp;

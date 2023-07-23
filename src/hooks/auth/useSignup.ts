@@ -1,10 +1,11 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { ref, set } from "firebase/database";
 import { FormEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ROUTES } from "@/constants/router/routes";
 
-import { auth } from "@/services/firebase/app";
+import { auth, database } from "@/services/firebase/app";
 
 export function useSignup() {
   const navigate = useNavigate();
@@ -23,11 +24,19 @@ export function useSignup() {
       const displayName = formData.get("displayName") as string;
 
       createUserWithEmailAndPassword(auth, email, password)
-        .then((credentials) =>
+        .then((credentials) => {
           updateProfile(credentials.user, {
             displayName,
-          }),
-        )
+          });
+          return credentials;
+        })
+        .then((credentials) => {
+          const { uid, email } = credentials.user;
+          set(ref(database, "users/" + uid), {
+            username: displayName,
+            email: email,
+          });
+        })
         .then(() => navigate(ROUTES.home))
         .catch(setError)
         .finally(() => setIsLoading(false));
