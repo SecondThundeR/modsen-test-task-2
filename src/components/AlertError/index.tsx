@@ -11,7 +11,7 @@ export const AlertError = memo(function AlertError({ error }: AlertErrorProps) {
     error && (
       <div className="alert alert-error">
         <XCircleIcon />
-        <span>{error.message}</span>
+        <span className="text-base font-medium">{error.message}</span>
       </div>
     )
   );
