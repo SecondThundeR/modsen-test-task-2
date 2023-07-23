@@ -22,7 +22,7 @@ export function useSearch() {
       setSearchParams({
         q,
         categories,
-        radius,
+        radius: String(+radius * 1000),
       });
     },
     [setSearchParams],
