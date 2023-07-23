@@ -2,17 +2,21 @@ import { memo } from "react";
 
 import { ReactComponent as XCircleIcon } from "@/assets/xCircle.svg";
 
+import { extractDetailsMessage } from "@/utils/error/extractDetailsMessage";
+
 interface AlertErrorProps {
-  error: Error | null;
+  error: unknown;
 }
 
 export const AlertError = memo(function AlertError({ error }: AlertErrorProps) {
+  if (!error) return null;
+
   return (
-    error && (
-      <div className="alert alert-error">
-        <XCircleIcon />
-        <span className="text-base font-medium">{error.message}</span>
-      </div>
-    )
+    <div className="alert alert-error">
+      <XCircleIcon />
+      <span className="text-base font-medium">
+        {extractDetailsMessage(error)}
+      </span>
+    </div>
   );
 });
