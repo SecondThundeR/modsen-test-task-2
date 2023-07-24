@@ -22,3 +22,5 @@ export const PlaceSchema = z.object({
   photos: z.array(PhotoSchema),
   rating: z.number(),
 });
+
+export type Place = z.infer<typeof PlaceSchema>;
