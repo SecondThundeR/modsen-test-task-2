@@ -4,6 +4,7 @@ import { ReactComponent as BookmarkIcon } from "@/assets/bookmark.svg";
 import { ReactComponent as BookmarkFilledIcon } from "@/assets/bookmarkFilled.svg";
 import { ReactComponent as LocationIcon } from "@/assets/location.svg";
 
+import { AlertError } from "@/components/AlertError";
 import { BackButton } from "@/components/BackButton";
 import { CategoryIcons } from "@/components/CategoryIcons";
 import { Spinner } from "@/components/Spinner";
@@ -29,7 +30,7 @@ export const PlaceDetails = memo(function PlaceDetails({
   onBack,
   onBookmarkClick,
 }: PlaceDetailsProps) {
-  const { placeDetails, isLoading } = usePlaceDetails(
+  const { placeDetails, error, isLoading } = usePlaceDetails(
     lat,
     lon,
     name ?? raw["name:ru"] ?? "",
@@ -45,6 +46,7 @@ export const PlaceDetails = memo(function PlaceDetails({
       ) : (
         <>
           <BackButton onBack={onBack} />
+          <AlertError error={error} />
 
           <div className="relative mb-2">
             <div className="absolute bottom-0 m-3 flex w-24">
