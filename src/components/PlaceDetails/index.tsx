@@ -11,8 +11,7 @@ import { usePlaceDetails } from "@/hooks/map/usePlaceDetails";
 
 import { PlacesPropeties } from "@/schemas/geoapify";
 
-interface PlaceDetailsProps
-  extends Omit<PlacesPropeties, "place_id" | "address_line2" | "name"> {
+interface PlaceDetailsProps extends Omit<PlacesPropeties, "place_id"> {
   isBookmarked?: boolean;
   onBack?: () => void;
   onBookmarkClick?: () => void;
@@ -22,6 +21,8 @@ export const PlaceDetails = memo(function PlaceDetails({
   categories,
   lat,
   lon,
+  address_line2,
+  name,
   datasource: { raw },
   isBookmarked = false,
   onBack,
@@ -59,19 +60,15 @@ export const PlaceDetails = memo(function PlaceDetails({
                   ? imageData.prefix + "original" + imageData.suffix
                   : ""
               }
-              alt={placeDetails?.name}
-              title={placeDetails?.name}
+              alt={name ?? ""}
+              title={name ?? ""}
             />
           </div>
-          <h1 className="line-clamp-2 text-2xl font-bold">
-            {placeDetails?.name}
-          </h1>
-          <p className="opacity-80">
-            {placeDetails?.location.formatted_address}
-          </p>
-          <p className="text-primary">
-            Rating: {placeDetails?.rating ?? "Unavailable"}
-          </p>
+          <h1 className="line-clamp-2 text-2xl font-bold">{name}</h1>
+          <p className="opacity-80">{address_line2}</p>
+          {placeDetails?.rating && (
+            <p className="text-primary">Rating: {placeDetails.rating}</p>
+          )}
           <div className="mt-2 flex justify-between">
             <button
               className="btn btn-primary btn-outline"
@@ -79,7 +76,7 @@ export const PlaceDetails = memo(function PlaceDetails({
             >
               {isBookmarked ? <BookmarkFilledIcon /> : <BookmarkIcon />}
             </button>
-            <button className="btn btn-primary">Маршрут</button>
+            <button className="btn btn-primary">Route</button>
           </div>
         </>
       )}
