@@ -4,10 +4,11 @@ import { useDispatch } from "react-redux";
 
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
+import { PlacesPropeties } from "@/schemas/geoapify";
+
 import { database } from "@/services/firebase/app";
 
 import {
-  Bookmark,
   appendBookmark,
   removeBookmark,
   setBookmarks,
@@ -26,7 +27,7 @@ export function useBookmarks() {
     try {
       const snapshot = await get(child(userDBRef, "bookmarks"));
       if (snapshot.exists()) {
-        dispatch(setBookmarks(snapshot.val()));
+        dispatch(setBookmarks([snapshot.exportVal()]));
       }
     } catch (error) {
       console.error(error);
@@ -34,15 +35,30 @@ export function useBookmarks() {
   }, [dispatch, userDBRef]);
 
   const addBookmark = useCallback(
-    async (bookmark: Bookmark) => {
+    async (properties: PlacesPropeties) => {
       if (!userDBRef) return;
 
+      const {
+        name,
+        address_line2: address,
+        categories,
+        lat,
+        lon,
+        place_id,
+      } = properties;
+
       try {
-        const placeID = Object.keys(bookmark)[0];
+        const bookmark = {
+          name: name ?? "",
+          address,
+          categories: categories.join(","),
+          lat,
+          lon,
+        };
         await update(child(userDBRef, "bookmarks"), {
-          [placeID]: bookmark,
+          [place_id]: bookmark,
         });
-        dispatch(appendBookmark(bookmark));
+        dispatch(appendBookmark({ [place_id]: bookmark }));
       } catch (error) {
         console.error(error);
       }
@@ -70,7 +86,7 @@ export function useBookmarks() {
     if (!userID) return;
 
     fetchBookmarks();
-  }, [fetchBookmarks, userID]);
+  }, []);
 
   return { bookmarks, addBookmark, deleteBookmark };
 }
