@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import { PlacesProperties } from "@/schemas/geoapify";
 
@@ -7,16 +7,13 @@ export function useSelectedPlace() {
     null,
   );
 
-  const updatePlace = useCallback(
-    (place: PlacesProperties) => {
-      setSelectedPlace(place);
-    },
-    [setSelectedPlace],
-  );
+  const updatePlace = (place: PlacesProperties) => {
+    setSelectedPlace(place);
+  };
 
-  const resetPlace = useCallback(() => {
+  const resetPlace = () => {
     setSelectedPlace(null);
-  }, [setSelectedPlace]);
+  };
 
   return { selectedPlace, updatePlace, resetPlace };
 }

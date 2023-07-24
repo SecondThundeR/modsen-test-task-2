@@ -4,13 +4,14 @@ import { useMap, useMapEvent } from "react-leaflet";
 export function useMapControls() {
   const map = useMap();
   const [isLocating, setIsLocating] = useState(false);
-  const [isFailed, setIsFailed] = useState<boolean>(false);
+  const [isFailed, setIsFailed] = useState(false);
 
   useMapEvent("locationfound", () => setIsLocating(false));
 
   useMapEvent("locationerror", (event) => {
-    setIsLocating(false);
     console.error("Failed to get location. Details:", event);
+
+    setIsLocating(false);
     setIsFailed(true);
   });
 
@@ -22,7 +23,7 @@ export function useMapControls() {
       enableHighAccuracy: true,
       timeout: 10000,
     });
-  }, [map, setIsLocating, setIsFailed]);
+  }, [map]);
 
   const zoomIn = useCallback(() => {
     map.zoomIn(undefined, {
