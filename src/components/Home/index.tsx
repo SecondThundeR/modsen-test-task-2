@@ -35,9 +35,11 @@ export const Home = () => {
             <Sidebar.Button to={ROUTES.search}>
               <SearchIcon />
             </Sidebar.Button>
-            <Sidebar.Button to={ROUTES.bookmarks}>
-              <BookmarkIcon />
-            </Sidebar.Button>
+            {userData && (
+              <Sidebar.Button to={ROUTES.bookmarks}>
+                <BookmarkIcon />
+              </Sidebar.Button>
+            )}
           </Sidebar.ButtonWrapper>
           <Sidebar.Button
             onClick={() => {
