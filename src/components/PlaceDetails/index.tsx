@@ -2,6 +2,7 @@ import { memo } from "react";
 
 import { ReactComponent as BookmarkIcon } from "@/assets/bookmark.svg";
 import { ReactComponent as BookmarkFilledIcon } from "@/assets/bookmarkFilled.svg";
+import { ReactComponent as LocationIcon } from "@/assets/location.svg";
 
 import { BackButton } from "@/components/BackButton";
 import { CategoryIcons } from "@/components/CategoryIcons";
@@ -31,7 +32,7 @@ export const PlaceDetails = memo(function PlaceDetails({
   const { placeDetails, isLoading } = usePlaceDetails(
     lat,
     lon,
-    raw["name:ru"] ?? name ?? "",
+    name ?? raw["name:ru"] ?? "",
   );
   const imageData = placeDetails?.photos?.[0];
 
@@ -76,7 +77,10 @@ export const PlaceDetails = memo(function PlaceDetails({
             >
               {isBookmarked ? <BookmarkFilledIcon /> : <BookmarkIcon />}
             </button>
-            <button className="btn btn-primary">Route</button>
+            <button className="btn btn-primary">
+              <LocationIcon />
+              Route
+            </button>
           </div>
         </>
       )}
