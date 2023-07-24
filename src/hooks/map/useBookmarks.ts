@@ -40,25 +40,26 @@ export function useBookmarks() {
 
       const {
         name,
-        address_line2: address,
+        address_line2,
         categories,
         lat,
         lon,
         place_id,
+        datasource,
       } = properties;
 
       try {
         const bookmark = {
           name: name ?? "",
-          address,
-          categories: categories.join(","),
+          address_line2,
           lat,
           lon,
+          datasource,
         };
         await update(child(userDBRef, "bookmarks"), {
-          [place_id]: bookmark,
+          [place_id]: { ...bookmark, categories: categories.join(",") },
         });
-        dispatch(appendBookmark({ [place_id]: bookmark }));
+        dispatch(appendBookmark({ [place_id]: { ...bookmark, categories } }));
       } catch (error) {
         console.error(error);
       }
