@@ -1,71 +1,98 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ROUTES } from "@/constants/router/routes";
+import { BackButton } from "@/components/BackButton";
+import { PlaceCard } from "@/components/PlaceCard";
+import { PlaceDetails } from "@/components/PlaceDetails";
+import { Spinner } from "@/components/Spinner";
 
-import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
-import { useAppSelector } from "@/hooks/redux/useAppSelector";
-import { useSearch } from "@/hooks/search/useSearch";
+import { useBookmarks } from "@/hooks/map/useBookmarks";
+import { usePlacesFetch } from "@/hooks/search/usePlacesFetch";
 
-import { getLocationPlaces } from "@/services/geoapify/getLocationPlaces";
-
-import { resetRadius, setRadius } from "@/store/location";
-import { resetSearchPlaces, setSearchPlaces } from "@/store/places";
-
-import { SearchCard } from "../SearchCard";
-import { Spinner } from "../Spinner";
+import { PlacesPropeties } from "@/schemas/geoapify";
 
 export function SearchResults() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
-  const {
-    params: { search, selectedCategories, selectedRadius },
-    isMissingParams,
-  } = useSearch();
-  const {
-    locationCoordinates: { lat, lng },
-  } = useAppSelector((state) => state.location);
-  const { searchPlaces } = useAppSelector((state) => state.places);
-  const dispatch = useAppDispatch();
+  const { searchPlaces, isLoading, resetFetch } = usePlacesFetch();
+  const { bookmarks, addBookmark, deleteBookmark } = useBookmarks();
+  const [selectedPlace, setSelectedPlace] = useState<PlacesPropeties | null>(
+    null,
+  );
 
-  useEffect(() => {
-    if (isMissingParams) return navigate(ROUTES.home);
+  const isSelectedPlaceBookmarked =
+    bookmarks.findIndex(
+      (bookmark) => Object.keys(bookmark)[0] === selectedPlace?.place_id,
+    ) !== -1;
 
-    const newRadius = +selectedRadius! * 1000;
-    dispatch(setRadius(newRadius));
-    getLocationPlaces(lat, lng, newRadius, selectedCategories!, search!)
-      .then((data) => dispatch(setSearchPlaces(data)))
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
-  }, [
-    dispatch,
-    isMissingParams,
-    lat,
-    lng,
-    navigate,
-    search,
-    selectedCategories,
-    selectedRadius,
-  ]);
-
-  const onBack = () => {
+  const onBack = useCallback(() => {
+    resetFetch();
     navigate(-1);
-    dispatch(resetRadius());
-    dispatch(resetSearchPlaces());
+  }, [navigate, resetFetch]);
+
+  const selectPlace = (place: PlacesPropeties) => {
+    setSelectedPlace(place);
   };
+
+  const resetSelectedPlace = () => {
+    setSelectedPlace(null);
+  };
+
+  const onBookmarkClick = useCallback(
+    async (options: {
+      isBookmarked?: boolean;
+      properties: PlacesPropeties;
+    }) => {
+      const { isBookmarked, properties } = options;
+      if (!properties) return;
+      isBookmarked
+        ? await deleteBookmark(properties.place_id)
+        : await addBookmark(properties);
+    },
+    [addBookmark, deleteBookmark],
+  );
 
   return (
     <div className="flex h-full w-80 flex-col items-center gap-3 overflow-auto bg-base-300 p-4">
-      {isLoading ? (
+      {selectedPlace ? (
+        <PlaceDetails
+          onBack={resetSelectedPlace}
+          onBookmarkClick={() =>
+            onBookmarkClick({
+              isBookmarked: isSelectedPlaceBookmarked,
+              properties: selectedPlace,
+            })
+          }
+          isBookmarked={isSelectedPlaceBookmarked}
+          {...selectedPlace}
+        />
+      ) : isLoading ? (
         <Spinner />
       ) : (
         <>
-          <button className="link-hover link-primary link" onClick={onBack}>
-            Go back
-          </button>
-          {searchPlaces?.map((place) => (
-            <SearchCard key={place.properties.place_id} {...place.properties} />
-          ))}
+          <BackButton onBack={onBack} />
+
+          {searchPlaces?.map((place) => {
+            const { place_id } = place.properties;
+            const isBookmarked =
+              bookmarks.findIndex(
+                (bookmark) => Object.keys(bookmark)[0] === place_id,
+              ) !== -1;
+
+            return (
+              <PlaceCard
+                key={place_id}
+                onBookmarkClick={() =>
+                  onBookmarkClick({
+                    isBookmarked,
+                    properties: place.properties,
+                  })
+                }
+                onArrowClick={() => selectPlace(place.properties)}
+                isBookmarked={isBookmarked}
+                {...place.properties}
+              />
+            );
+          })}
         </>
       )}
     </div>
