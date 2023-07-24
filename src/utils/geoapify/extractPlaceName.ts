@@ -4,7 +4,5 @@ export function extractPlaceName(
   name: NullableString,
   address: NullableString,
 ) {
-  if (name) return name;
-  if (address) return address;
-  return null;
+  return name ?? address ?? null;
 }
