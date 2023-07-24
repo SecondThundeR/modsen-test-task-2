@@ -15,10 +15,6 @@ const PhotoSchema = z.object({
 });
 
 export const PlaceSchema = z.object({
-  location: z.object({
-    formatted_address: z.string(),
-  }),
-  name: z.string(),
   photos: z.array(PhotoSchema).nullish(),
   rating: z.number().nullish(),
 });
