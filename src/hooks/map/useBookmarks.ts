@@ -22,7 +22,7 @@ export function useBookmarks() {
   const userDBRef = userID ? ref(database, "users/" + userID) : null;
 
   const fetchBookmarks = useCallback(async () => {
-    if (!userDBRef) return;
+    if (!userDBRef || bookmarks !== null) return;
 
     try {
       const snapshot = await get(child(userDBRef, "bookmarks"));
