@@ -1,13 +1,13 @@
+import axios from "axios";
+
 import { BASE_URL } from "@/constants/foursquare/links";
 
 import { PlaceSchema } from "@/schemas/foursquare";
 
-import { fetcher } from "@/services/geoapify/fetcher";
-
 import { parseResponse } from "@/utils/zod/parseResponse";
 
 export const getPlaceDetails = async (fsq_id: string) => {
-  const res = await fetcher.get(`${BASE_URL}/${fsq_id}`, {
+  const res = await axios.get(`${BASE_URL}/${fsq_id}`, {
     params: {
       fields: "rating,photos",
     },
