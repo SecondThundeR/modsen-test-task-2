@@ -19,8 +19,8 @@ export const PlaceSchema = z.object({
     formatted_address: z.string(),
   }),
   name: z.string(),
-  photos: z.array(PhotoSchema),
-  rating: z.number(),
+  photos: z.array(PhotoSchema).nullish(),
+  rating: z.number().nullish(),
 });
 
 export type Place = z.infer<typeof PlaceSchema>;
