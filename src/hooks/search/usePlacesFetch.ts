@@ -14,7 +14,7 @@ export function usePlacesFetch() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const {
-    params: { search, selectedCategories, selectedRadius },
+    params: { searchQuery, selectedCategories, selectedRadius },
   } = useSearch();
   const {
     locationCoordinates: { lat, lng },
@@ -32,22 +32,34 @@ export function usePlacesFetch() {
     navigate(-1);
   }, [navigate, resetFetch]);
 
-  useEffect(() => {
+  const fetchPlaces = useCallback(async () => {
     const radius = +selectedRadius!;
 
     dispatch(setRadius(radius));
     setIsLoading(true);
 
-    getLocationPlaces(lat, lng, radius, selectedCategories!, search!)
-      .then((data) => {
-        const filteredPlaces = data.filter(
-          (place) => place.properties.name !== undefined,
-        );
-        dispatch(setSearchPlaces(filteredPlaces));
-      })
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
-  }, [lat, lng, selectedCategories, search, selectedRadius]);
+    try {
+      const data = await getLocationPlaces(
+        lat,
+        lng,
+        radius,
+        selectedCategories!,
+        searchQuery!,
+      );
+      const filteredPlaces = data.filter(
+        (place) => place.properties.name !== undefined,
+      );
+      dispatch(setSearchPlaces(filteredPlaces));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [lat, lng, selectedCategories, searchQuery, selectedRadius]);
+
+  useEffect(() => {
+    fetchPlaces();
+  }, [fetchPlaces]);
 
   return { searchPlaces, isLoading, onBack };
 }

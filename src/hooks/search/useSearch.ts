@@ -4,11 +4,13 @@ import { useSearchParams } from "react-router-dom";
 export function useSearch() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const search = searchParams.get("q");
+  const searchQuery = searchParams.get("q");
   const selectedCategories = searchParams.get("categories");
   const selectedRadius = searchParams.get("radius");
   const isMissingParams =
-    search === null || selectedCategories === null || selectedRadius === null;
+    searchQuery === null ||
+    selectedCategories === null ||
+    selectedRadius === null;
 
   const onSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -30,7 +32,7 @@ export function useSearch() {
 
   return {
     params: {
-      search,
+      searchQuery,
       selectedCategories,
       selectedRadius,
     },
