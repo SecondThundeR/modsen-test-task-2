@@ -8,7 +8,7 @@ import { BackButton } from "@/components/BackButton";
 import { CategoryIcons } from "@/components/CategoryIcons";
 import { Spinner } from "@/components/Spinner";
 
-import { usePlaceDetails } from "@/hooks/map/usePlaceDetails";
+import { usePlaceDetails } from "@/hooks/places/usePlaceDetails";
 
 import { PlacesProperties } from "@/schemas/geoapify";
 

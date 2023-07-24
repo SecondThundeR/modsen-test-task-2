@@ -6,7 +6,7 @@ import { PlaceCard } from "@/components/PlaceCard";
 import { PlaceDetails } from "@/components/PlaceDetails";
 import { Spinner } from "@/components/Spinner";
 
-import { useBookmarks } from "@/hooks/map/useBookmarks";
+import { useBookmarks } from "@/hooks/places/useBookmarks";
 import { usePlacesFetch } from "@/hooks/search/usePlacesFetch";
 
 import { PlacesProperties } from "@/schemas/geoapify";

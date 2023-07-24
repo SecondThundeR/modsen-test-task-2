@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { PlaceCard } from "@/components/PlaceCard";
 import { PlaceDetails } from "@/components/PlaceDetails";
 
-import { useBookmarks } from "@/hooks/map/useBookmarks";
+import { useBookmarks } from "@/hooks/places/useBookmarks";
 
 import { PlacesProperties } from "@/schemas/geoapify";
 
