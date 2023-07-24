@@ -1,5 +1,6 @@
 import { PlaceCard } from "@/components/PlaceCard";
 import { PlaceDetails } from "@/components/PlaceDetails";
+import { Sidebar } from "@/components/Sidebar";
 
 import { useBookmarks } from "@/hooks/places/useBookmarks";
 import { useSelectedPlace } from "@/hooks/places/useSelectedPlace";
@@ -10,11 +11,10 @@ import { isPlaceBookmarked } from "@/utils/bookmarks/isPlaceBookmarked";
 export function Bookmarks() {
   const { bookmarks, onBookmarkClick } = useBookmarks();
   const { selectedPlace, updatePlace, resetPlace } = useSelectedPlace();
-
   const isSelectedPlaceBookmarked = isPlaceBookmarked(bookmarks, selectedPlace);
 
   return (
-    <div className="flex h-full w-80 flex-col items-center gap-3 overflow-auto bg-base-300 p-4">
+    <Sidebar.PageWrapper>
       {selectedPlace ? (
         <PlaceDetails
           onBack={resetPlace}
@@ -52,6 +52,6 @@ export function Bookmarks() {
           })}
         </>
       )}
-    </div>
+    </Sidebar.PageWrapper>
   );
 }

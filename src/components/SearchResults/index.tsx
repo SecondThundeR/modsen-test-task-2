@@ -1,6 +1,7 @@
 import { BackButton } from "@/components/BackButton";
 import { PlaceCard } from "@/components/PlaceCard";
 import { PlaceDetails } from "@/components/PlaceDetails";
+import { Sidebar } from "@/components/Sidebar";
 import { Spinner } from "@/components/Spinner";
 
 import { useBookmarks } from "@/hooks/places/useBookmarks";
@@ -16,7 +17,7 @@ export function SearchResults() {
   const isSelectedPlaceBookmarked = isPlaceBookmarked(bookmarks, selectedPlace);
 
   return (
-    <div className="flex h-full w-80 flex-col items-center gap-3 overflow-auto bg-base-300 p-4">
+    <Sidebar.PageWrapper>
       {selectedPlace ? (
         <PlaceDetails
           onBack={resetPlace}
@@ -56,6 +57,6 @@ export function SearchResults() {
           })}
         </>
       )}
-    </div>
+    </Sidebar.PageWrapper>
   );
 }

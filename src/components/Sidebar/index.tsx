@@ -2,6 +2,7 @@ import { PropsWithChildren, memo } from "react";
 
 import { SidebarButton } from "@/components/Sidebar/SidebarButton";
 import { SidebarButtonWrapper } from "@/components/Sidebar/SidebarButtonWrapper";
+import { SidebarPageWrapper } from "@/components/Sidebar/SidebarPageWrapper";
 
 const MemoizedSidebar = memo(function Sidebar({ children }: PropsWithChildren) {
   return (
@@ -14,4 +15,5 @@ const MemoizedSidebar = memo(function Sidebar({ children }: PropsWithChildren) {
 export const Sidebar = Object.assign(MemoizedSidebar, {
   Button: SidebarButton,
   ButtonWrapper: SidebarButtonWrapper,
+  PageWrapper: SidebarPageWrapper,
 });
