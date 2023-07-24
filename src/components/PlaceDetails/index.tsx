@@ -31,7 +31,7 @@ export const PlaceDetails = memo(function PlaceDetails({
   const { placeDetails, isLoading } = usePlaceDetails(
     lat,
     lon,
-    raw["name:ru"] ?? "",
+    raw["name:ru"] ?? name ?? "",
   );
   const imageData = placeDetails?.photos?.[0];
 
