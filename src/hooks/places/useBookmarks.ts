@@ -83,11 +83,25 @@ export function useBookmarks() {
     [dispatch, userDBRef],
   );
 
+  const onBookmarkClick = useCallback(
+    async (options: {
+      isBookmarked?: boolean;
+      properties: PlacesProperties;
+    }) => {
+      const { isBookmarked, properties } = options;
+      if (!properties) return;
+      isBookmarked
+        ? await deleteBookmark(properties.place_id)
+        : await addBookmark(properties);
+    },
+    [addBookmark, deleteBookmark],
+  );
+
   useEffect(() => {
     if (!userID) return;
 
     fetchBookmarks();
   }, []);
 
-  return { bookmarks, addBookmark, deleteBookmark };
+  return { bookmarks, onBookmarkClick };
 }

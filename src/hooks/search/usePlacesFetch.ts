@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
@@ -10,6 +11,7 @@ import { resetRadius, setRadius } from "@/store/location";
 import { resetSearchPlaces, setSearchPlaces } from "@/store/places";
 
 export function usePlacesFetch() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const {
     params: { search, selectedCategories, selectedRadius },
@@ -24,6 +26,11 @@ export function usePlacesFetch() {
     dispatch(resetRadius());
     dispatch(resetSearchPlaces());
   }, [dispatch]);
+
+  const onBack = useCallback(() => {
+    resetFetch();
+    navigate(-1);
+  }, [navigate, resetFetch]);
 
   useEffect(() => {
     const radius = +selectedRadius!;
@@ -42,5 +49,5 @@ export function usePlacesFetch() {
       .finally(() => setIsLoading(false));
   }, [lat, lng, selectedCategories, search, selectedRadius]);
 
-  return { searchPlaces, isLoading, resetFetch };
+  return { searchPlaces, isLoading, onBack };
 }

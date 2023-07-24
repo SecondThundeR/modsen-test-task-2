@@ -1,50 +1,23 @@
-import { useCallback, useState } from "react";
-
 import { PlaceCard } from "@/components/PlaceCard";
 import { PlaceDetails } from "@/components/PlaceDetails";
 
 import { useBookmarks } from "@/hooks/places/useBookmarks";
+import { useSelectedPlace } from "@/hooks/places/useSelectedPlace";
 
-import { PlacesProperties } from "@/schemas/geoapify";
+import { extractProperties } from "@/utils/bookmarks/extractProperties";
+import { isPlaceBookmarked } from "@/utils/bookmarks/isPlaceBookmarked";
 
 export function Bookmarks() {
-  const { bookmarks, addBookmark, deleteBookmark } = useBookmarks();
-  const [selectedPlace, setSelectedPlace] = useState<PlacesProperties | null>(
-    null,
-  );
+  const { bookmarks, onBookmarkClick } = useBookmarks();
+  const { selectedPlace, updatePlace, resetPlace } = useSelectedPlace();
 
-  const isSelectedPlaceBookmarked =
-    bookmarks.findIndex(
-      (bookmark) => Object.keys(bookmark)[0] === selectedPlace?.place_id,
-    ) !== -1;
-
-  const selectPlace = (place: PlacesProperties) => {
-    setSelectedPlace(place);
-  };
-
-  const resetSelectedPlace = () => {
-    setSelectedPlace(null);
-  };
-
-  const onBookmarkClick = useCallback(
-    async (options: {
-      isBookmarked?: boolean;
-      properties: PlacesProperties;
-    }) => {
-      const { isBookmarked, properties } = options;
-      if (!properties) return;
-      isBookmarked
-        ? await deleteBookmark(properties.place_id)
-        : await addBookmark(properties);
-    },
-    [addBookmark, deleteBookmark],
-  );
+  const isSelectedPlaceBookmarked = isPlaceBookmarked(bookmarks, selectedPlace);
 
   return (
     <div className="flex h-full w-80 flex-col items-center gap-3 overflow-auto bg-base-300 p-4">
       {selectedPlace ? (
         <PlaceDetails
-          onBack={resetSelectedPlace}
+          onBack={resetPlace}
           onBookmarkClick={() =>
             onBookmarkClick({
               isBookmarked: isSelectedPlaceBookmarked,
@@ -59,23 +32,19 @@ export function Bookmarks() {
           <h1 className="text-xl font-bold">Bookmarks:</h1>
           {bookmarks?.length === 0 && <h1>You have no bookmarks yet</h1>}
           {bookmarks?.map((bookmark) => {
-            const place_id = Object.keys(bookmark)[0];
-            const properties = { ...bookmark[place_id], place_id };
-            const isBookmarked =
-              bookmarks.findIndex(
-                (bookmark) => Object.keys(bookmark)[0] === place_id,
-              ) !== -1;
+            const properties = extractProperties(bookmark);
+            const isBookmarked = isPlaceBookmarked(bookmarks, properties);
 
             return (
               <PlaceCard
-                key={place_id}
+                key={properties.place_id}
                 onBookmarkClick={() =>
                   onBookmarkClick({
                     isBookmarked,
                     properties,
                   })
                 }
-                onArrowClick={() => selectPlace(properties)}
+                onArrowClick={() => updatePlace(properties)}
                 isBookmarked={isBookmarked}
                 {...properties}
               />
