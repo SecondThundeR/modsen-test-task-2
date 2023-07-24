@@ -7,6 +7,11 @@ const PlacesPropertiesSchema = z.object({
   place_id: z.string(),
   address_line2: z.string(),
   categories: z.array(z.string()),
+  datasource: z.object({
+    raw: z.object({
+      "name:ru": z.string().nullish(),
+    }),
+  }),
 });
 
 export const PlacesSchema = z.object({
