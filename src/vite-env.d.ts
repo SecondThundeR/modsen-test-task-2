@@ -9,6 +9,7 @@ interface ImportMetaEnv {
   readonly VITE_APP_ID: string;
   readonly VITE_APP_DB_URL: string;
   readonly VITE_GEOAPIFY_KEY: string;
+  readonly VITE_FOURSQUARE_KEY: string;
 }
 
 interface ImportMeta {
