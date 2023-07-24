@@ -6,9 +6,9 @@ import { ReactComponent as BookmarkFilledIcon } from "@/assets/bookmarkFilled.sv
 
 import { CategoryIcons } from "@/components/CategoryIcons";
 
-import { PlacesPropeties } from "@/schemas/geoapify";
+import { PlacesProperties } from "@/schemas/geoapify";
 
-interface SearchCardProps extends Omit<PlacesPropeties, "lat" | "lon"> {
+interface SearchCardProps extends Omit<PlacesProperties, "lat" | "lon"> {
   isBookmarked?: boolean;
   onBookmarkClick?: () => void;
   onArrowClick?: () => void;

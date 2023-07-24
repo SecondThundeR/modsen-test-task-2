@@ -9,13 +9,13 @@ import { Spinner } from "@/components/Spinner";
 import { useBookmarks } from "@/hooks/map/useBookmarks";
 import { usePlacesFetch } from "@/hooks/search/usePlacesFetch";
 
-import { PlacesPropeties } from "@/schemas/geoapify";
+import { PlacesProperties } from "@/schemas/geoapify";
 
 export function SearchResults() {
   const navigate = useNavigate();
   const { searchPlaces, isLoading, resetFetch } = usePlacesFetch();
   const { bookmarks, addBookmark, deleteBookmark } = useBookmarks();
-  const [selectedPlace, setSelectedPlace] = useState<PlacesPropeties | null>(
+  const [selectedPlace, setSelectedPlace] = useState<PlacesProperties | null>(
     null,
   );
 
@@ -29,7 +29,7 @@ export function SearchResults() {
     navigate(-1);
   }, [navigate, resetFetch]);
 
-  const selectPlace = (place: PlacesPropeties) => {
+  const selectPlace = (place: PlacesProperties) => {
     setSelectedPlace(place);
   };
 
@@ -40,7 +40,7 @@ export function SearchResults() {
   const onBookmarkClick = useCallback(
     async (options: {
       isBookmarked?: boolean;
-      properties: PlacesPropeties;
+      properties: PlacesProperties;
     }) => {
       const { isBookmarked, properties } = options;
       if (!properties) return;

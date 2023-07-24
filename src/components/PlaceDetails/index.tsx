@@ -9,9 +9,9 @@ import { Spinner } from "@/components/Spinner";
 
 import { usePlaceDetails } from "@/hooks/map/usePlaceDetails";
 
-import { PlacesPropeties } from "@/schemas/geoapify";
+import { PlacesProperties } from "@/schemas/geoapify";
 
-interface PlaceDetailsProps extends Omit<PlacesPropeties, "place_id"> {
+interface PlaceDetailsProps extends Omit<PlacesProperties, "place_id"> {
   isBookmarked?: boolean;
   onBack?: () => void;
   onBookmarkClick?: () => void;

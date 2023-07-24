@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { PlacesPropeties } from "@/schemas/geoapify";
+import { PlacesProperties } from "@/schemas/geoapify";
 
 export interface Bookmark {
-  [placeId: string]: Omit<PlacesPropeties, "place_id">;
+  [placeId: string]: Omit<PlacesProperties, "place_id">;
 }
 
 export interface BookmarksState {

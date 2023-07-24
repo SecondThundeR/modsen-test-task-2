@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
-import { PlacesPropeties } from "@/schemas/geoapify";
+import { PlacesProperties } from "@/schemas/geoapify";
 
 import { database } from "@/services/firebase/app";
 
@@ -35,7 +35,7 @@ export function useBookmarks() {
   }, [dispatch, userDBRef]);
 
   const addBookmark = useCallback(
-    async (properties: PlacesPropeties) => {
+    async (properties: PlacesProperties) => {
       if (!userDBRef) return;
 
       const {

@@ -22,5 +22,5 @@ export const PlacesSchema = z.object({
   ),
 });
 
-export type PlacesPropeties = z.infer<typeof PlacesPropertiesSchema>;
+export type PlacesProperties = z.infer<typeof PlacesPropertiesSchema>;
 export type Places = z.infer<typeof PlacesSchema>["features"];
