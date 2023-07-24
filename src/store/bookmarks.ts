@@ -5,6 +5,8 @@ export interface Bookmark {
     address: string;
     name: string;
     categories: string;
+    lat: number;
+    lon: number;
   };
 }
 
@@ -35,8 +37,7 @@ export const bookmarksSlice = createSlice({
     },
     removeBookmark: (state, action: PayloadAction<string>) => {
       const bookmarkIndex = state.bookmarks.findIndex(
-        (bookmark) =>
-          Object.keys(bookmark)[0] === Object.keys(action.payload)[0],
+        (bookmark) => Object.keys(bookmark)[0] === action.payload,
       );
       if (bookmarkIndex !== -1) state.bookmarks.splice(bookmarkIndex, 1);
     },
