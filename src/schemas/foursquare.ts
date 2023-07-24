@@ -1,12 +1,14 @@
 import { z } from "zod";
 
 export const SearchSchema = z.object({
-  results: z.array(
-    z.object({
-      fsq_id: z.string(),
-      distance: z.number(),
-    }),
-  ),
+  results: z
+    .array(
+      z.object({
+        fsq_id: z.string(),
+        distance: z.number(),
+      }),
+    )
+    .nullish(),
 });
 
 const PhotoSchema = z.object({

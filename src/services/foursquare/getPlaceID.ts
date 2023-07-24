@@ -23,6 +23,9 @@ export const getPlaceID = async (lat: number, lon: number, query: string) => {
       Authorization: import.meta.env.VITE_FOURSQUARE_KEY,
     },
   });
+
   const { results } = await parseResponse(res.data, SearchSchema);
+  if (!results) throw new Error("Can't extract Foursquare ID for this place!");
+
   return results[0].fsq_id;
 };

@@ -30,7 +30,7 @@ export const PlaceCard = memo(function PlaceCard({
         ))}
       </div>
       <h1 className="line-clamp-2 text-2xl font-bold">{name}</h1>
-      <p className="opacity-80">{address_line2}</p>
+      {address_line2 && <p className="opacity-80">{address_line2}</p>}
       <div className="mt-2 flex justify-between">
         <button
           className="btn btn-primary btn-outline"

@@ -66,7 +66,7 @@ export const PlaceDetails = memo(function PlaceDetails({
             />
           </div>
           <h1 className="line-clamp-2 text-2xl font-bold">{name}</h1>
-          <p className="opacity-80">{address_line2}</p>
+          {address_line2 && <p className="opacity-80">{address_line2}</p>}
           {placeDetails?.rating && (
             <p className="text-primary">Rating: {placeDetails.rating}</p>
           )}

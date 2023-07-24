@@ -5,7 +5,7 @@ const PlacesPropertiesSchema = z.object({
   lon: z.number(),
   name: z.string().nullish(),
   place_id: z.string(),
-  address_line2: z.string(),
+  address_line2: z.string().nullish(),
   categories: z.array(z.string()),
   datasource: z.object({
     raw: z.object({
