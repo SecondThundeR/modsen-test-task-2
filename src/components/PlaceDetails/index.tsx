@@ -1,4 +1,3 @@
-import { RouteCard } from "@/RouteCard";
 import { memo } from "react";
 
 import { ReactComponent as BookmarkIcon } from "@/assets/bookmark.svg";
@@ -8,6 +7,7 @@ import { ReactComponent as LocationIcon } from "@/assets/location.svg";
 import { AlertError } from "@/components/AlertError";
 import { BackButton } from "@/components/BackButton";
 import { CategoryIcons } from "@/components/CategoryIcons";
+import { RouteCard } from "@/components/RouteCard";
 import { Spinner } from "@/components/Spinner";
 
 import { useRoute } from "@/hooks/map/useRoute";
