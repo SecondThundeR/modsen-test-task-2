@@ -19,10 +19,13 @@ import { Spinner } from "@/components/Spinner";
 import { ROUTES } from "@/constants/router/routes";
 
 import { useAuthUser } from "@/hooks/auth/useAuthUser";
+import { useReset } from "@/hooks/map/useReset";
 
 export const Home = () => {
   const [isHidden, setIsHidden] = useState(false);
   const { userData, isFetching, handleLogout } = useAuthUser();
+
+  useReset();
 
   return (
     <div className="min-h-screen">
