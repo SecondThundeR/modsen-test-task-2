@@ -39,7 +39,8 @@ export const locationSlice = createSlice({
       state.locationRadius = action.payload;
     },
     resetRadius: (state) => {
-      state.locationRadius = DEFAULT_RADIUS_METERS;
+      if (state.locationRadius !== DEFAULT_RADIUS_METERS)
+        state.locationRadius = DEFAULT_RADIUS_METERS;
     },
   },
 });
