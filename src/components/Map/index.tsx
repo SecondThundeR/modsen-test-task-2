@@ -3,6 +3,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import { MapAlerts } from "@/components/Map/Alerts";
 import { MapControls } from "@/components/Map/Controls";
 import { MapPlaces } from "@/components/Map/Places";
+import { MapRoute } from "@/components/Map/Route";
 import { MapUserLocation } from "@/components/Map/UserLocation";
 
 import { DEFAULT_ZOOM } from "@/constants/leaflet/defaultMapValues";
@@ -32,6 +33,7 @@ export function Map() {
       <MapUserLocation />
       <MapControls />
       <MapAlerts isLoading={isLoading} error={error} />
+      <MapRoute />
     </MapContainer>
   );
 }

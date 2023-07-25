@@ -22,5 +22,31 @@ export const PlacesSchema = z.object({
   ),
 });
 
+export const RouteSchema = z.object({
+  features: z.array(
+    z.object({
+      type: z.literal("Feature"),
+      properties: z.object({
+        distance: z.number(),
+        time: z.number(),
+      }),
+      geometry: z.object({
+        type: z.literal("MultiLineString"),
+        coordinates: z.array(z.array(z.array(z.number()))),
+      }),
+    }),
+  ),
+  properties: z.object({
+    waypoints: z.array(
+      z.object({
+        lat: z.number(),
+        lon: z.number(),
+      }),
+    ),
+  }),
+  type: z.literal("FeatureCollection"),
+});
+
 export type PlacesProperties = z.infer<typeof PlacesPropertiesSchema>;
 export type Places = z.infer<typeof PlacesSchema>["features"];
+export type Route = z.infer<typeof RouteSchema>;

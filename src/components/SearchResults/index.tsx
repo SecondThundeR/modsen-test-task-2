@@ -4,6 +4,7 @@ import { PlaceDetails } from "@/components/PlaceDetails";
 import { Sidebar } from "@/components/Sidebar";
 import { Spinner } from "@/components/Spinner";
 
+import { useRoute } from "@/hooks/map/useRoute";
 import { useBookmarks } from "@/hooks/places/useBookmarks";
 import { useSelectedPlace } from "@/hooks/places/useSelectedPlace";
 import { usePlacesFetch } from "@/hooks/search/usePlacesFetch";
@@ -14,13 +15,17 @@ export function SearchResults() {
   const { searchPlaces, isLoading, onBack } = usePlacesFetch();
   const { bookmarks, onBookmarkClick } = useBookmarks();
   const { selectedPlace, updatePlace, resetPlace } = useSelectedPlace();
+  const { resetRouteData } = useRoute();
   const isSelectedPlaceBookmarked = isPlaceBookmarked(bookmarks, selectedPlace);
 
   return (
     <Sidebar.PageWrapper>
       {selectedPlace ? (
         <PlaceDetails
-          onBack={resetPlace}
+          onBack={() => {
+            resetPlace();
+            resetRouteData();
+          }}
           onBookmarkClick={() =>
             onBookmarkClick({
               isBookmarked: isSelectedPlaceBookmarked,

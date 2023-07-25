@@ -2,6 +2,7 @@ import { PlaceCard } from "@/components/PlaceCard";
 import { PlaceDetails } from "@/components/PlaceDetails";
 import { Sidebar } from "@/components/Sidebar";
 
+import { useRoute } from "@/hooks/map/useRoute";
 import { useBookmarks } from "@/hooks/places/useBookmarks";
 import { useSelectedPlace } from "@/hooks/places/useSelectedPlace";
 
@@ -11,13 +12,17 @@ import { isPlaceBookmarked } from "@/utils/bookmarks/isPlaceBookmarked";
 export function Bookmarks() {
   const { bookmarks, onBookmarkClick } = useBookmarks();
   const { selectedPlace, updatePlace, resetPlace } = useSelectedPlace();
+  const { resetRouteData } = useRoute();
   const isSelectedPlaceBookmarked = isPlaceBookmarked(bookmarks, selectedPlace);
 
   return (
     <Sidebar.PageWrapper>
       {selectedPlace ? (
         <PlaceDetails
-          onBack={resetPlace}
+          onBack={() => {
+            resetPlace();
+            resetRouteData();
+          }}
           onBookmarkClick={() =>
             onBookmarkClick({
               isBookmarked: isSelectedPlaceBookmarked,

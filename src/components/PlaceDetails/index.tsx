@@ -1,3 +1,4 @@
+import { RouteCard } from "@/RouteCard";
 import { memo } from "react";
 
 import { ReactComponent as BookmarkIcon } from "@/assets/bookmark.svg";
@@ -9,6 +10,7 @@ import { BackButton } from "@/components/BackButton";
 import { CategoryIcons } from "@/components/CategoryIcons";
 import { Spinner } from "@/components/Spinner";
 
+import { useRoute } from "@/hooks/map/useRoute";
 import { usePlaceDetails } from "@/hooks/places/usePlaceDetails";
 
 import { PlacesProperties } from "@/schemas/geoapify";
@@ -35,18 +37,24 @@ export const PlaceDetails = memo(function PlaceDetails({
     lon,
     name ?? raw["name:ru"] ?? "",
   );
+  const {
+    routeData,
+    error: routeError,
+    isLoading: isLoadingRoute,
+    onRouteClick,
+  } = useRoute();
   const imageData = placeDetails?.photos?.[0];
 
   if (isLoading) return <Spinner />;
 
   return (
-    <div className="flex w-full flex-col gap-2 rounded-xl">
+    <div className="flex w-full flex-col gap-3 rounded-xl">
       {isLoading ? (
         <Spinner />
       ) : (
         <>
           <BackButton onBack={onBack} />
-          <AlertError error={error} />
+          <AlertError error={error ?? routeError} />
 
           <div className="relative mb-2">
             <div className="absolute bottom-0 m-3 flex w-24">
@@ -79,11 +87,20 @@ export const PlaceDetails = memo(function PlaceDetails({
             >
               {isBookmarked ? <BookmarkFilledIcon /> : <BookmarkIcon />}
             </button>
-            <button className="btn btn-primary">
-              <LocationIcon />
-              Route
+            <button
+              className="btn btn-primary"
+              onClick={() => onRouteClick(lat, lon)}
+            >
+              {isLoadingRoute ? <Spinner /> : <LocationIcon />}
+              {!routeData ? "Route" : "Reset route"}
             </button>
           </div>
+          {routeData && (
+            <div className="flex flex-col gap-2">
+              <h1 className="text-xl font-bold">Route details:</h1>
+              <RouteCard routeData={routeData} />
+            </div>
+          )}
         </>
       )}
     </div>
