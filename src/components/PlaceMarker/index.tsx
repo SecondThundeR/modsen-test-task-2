@@ -4,7 +4,7 @@ import { Marker, Popup } from "react-leaflet";
 
 import { type PlacesProperties } from "@/schemas/geoapify";
 
-import { extractPlaceName } from "@/utils/geoapify/extractPlaceName";
+import { formatPlaceMarkerDetails } from "@/utils/geoapify/formatPlaceMarkerDetails";
 
 interface PlaceMarkerProperties
   extends Omit<PlacesProperties, "place_id" | "categories"> {
@@ -18,7 +18,7 @@ export const PlaceMarker = memo(function PlaceMarker({
   address_line2,
   icon,
 }: PlaceMarkerProperties) {
-  const placeName = extractPlaceName(name, address_line2);
+  const placeName = formatPlaceMarkerDetails(name, address_line2);
   return (
     <Marker position={[lat, lon]} title={name ?? undefined} icon={icon}>
       {placeName && <Popup>{placeName}</Popup>}
