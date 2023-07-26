@@ -21,8 +21,8 @@ export function useAuthUser() {
         dispatch(resetUser());
         return;
       }
-      const { uid, email, displayName } = user;
-      dispatch(setUser({ uid, email, displayName }));
+      const { uid, displayName } = user;
+      dispatch(setUser({ uid, displayName }));
       setIsFetching(false);
     });
 
