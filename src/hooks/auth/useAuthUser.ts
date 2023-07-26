@@ -21,13 +21,14 @@ export function useAuthUser() {
         dispatch(resetUser());
         return;
       }
+
       const { uid, displayName } = user;
       dispatch(setUser({ uid, displayName }));
       setIsFetching(false);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   const handleLogout = async () => {
     try {

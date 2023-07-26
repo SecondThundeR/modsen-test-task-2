@@ -16,13 +16,12 @@ export function useSignup() {
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setError(null);
+      setIsLoading(true);
 
       const formData = new FormData(event.currentTarget);
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
       const displayName = formData.get("displayName") as string;
-
-      setIsLoading(true);
 
       try {
         const credentials = await createUserWithEmailAndPassword(
@@ -43,13 +42,12 @@ export function useSignup() {
 
         navigate(ROUTES.home);
       } catch (error) {
-        console.error(error);
         setError(error);
       } finally {
         setIsLoading(false);
       }
     },
-    [navigate, setError, setIsLoading],
+    [navigate],
   );
 
   return { isLoading, error, onSubmit };

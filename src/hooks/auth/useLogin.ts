@@ -15,24 +15,22 @@ export function useLogin() {
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setError(null);
+      setIsLoading(true);
 
       const formData = new FormData(event.currentTarget);
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
 
-      setIsLoading(true);
-
       try {
         await signInWithEmailAndPassword(auth, email, password);
         navigate(ROUTES.home);
       } catch (error) {
-        console.error(error);
         setError(error);
       } finally {
         setIsLoading(false);
       }
     },
-    [navigate, setError, setIsLoading],
+    [navigate],
   );
 
   return { isLoading, error, onSubmit };
