@@ -2,6 +2,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { PlacesProperties } from "@/schemas/geoapify";
 
+import { getBookmarkIndex } from "@/utils/bookmarks/getBookmarkIndex";
+
 export interface Bookmark {
   [placeId: string]: Omit<PlacesProperties, "place_id">;
 }
@@ -25,16 +27,14 @@ export const bookmarksSlice = createSlice({
       state.bookmarks = action.payload;
     },
     appendBookmark: (state, action: PayloadAction<Bookmark>) => {
-      const bookmarkIndex = state.bookmarks.findIndex(
-        (bookmark) =>
-          Object.keys(bookmark)[0] === Object.keys(action.payload)[0],
+      const bookmarkIndex = getBookmarkIndex(
+        state.bookmarks,
+        Object.keys(action.payload)[0],
       );
       if (bookmarkIndex === -1) state.bookmarks.push(action.payload);
     },
     removeBookmark: (state, action: PayloadAction<string>) => {
-      const bookmarkIndex = state.bookmarks.findIndex(
-        (bookmark) => Object.keys(bookmark)[0] === action.payload,
-      );
+      const bookmarkIndex = getBookmarkIndex(state.bookmarks, action.payload);
       if (bookmarkIndex !== -1) state.bookmarks.splice(bookmarkIndex, 1);
     },
   },

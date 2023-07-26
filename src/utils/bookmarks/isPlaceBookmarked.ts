@@ -2,14 +2,12 @@ import { PlacesProperties } from "@/schemas/geoapify";
 
 import { Bookmark } from "@/store/bookmarks";
 
+import { getBookmarkIndex } from "./getBookmarkIndex";
+
 export function isPlaceBookmarked(
   bookmarks: Bookmark[],
   placeProperties?: PlacesProperties | null,
 ) {
   if (!placeProperties) return false;
-  return (
-    bookmarks.findIndex(
-      (bookmark) => Object.keys(bookmark)[0] === placeProperties?.place_id,
-    ) !== -1
-  );
+  return getBookmarkIndex(bookmarks, placeProperties.place_id) !== -1;
 }
