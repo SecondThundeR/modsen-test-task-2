@@ -22,15 +22,11 @@ export function usePlacesFetch() {
   const { searchPlaces } = useAppSelector((state) => state.places);
   const dispatch = useAppDispatch();
 
-  const resetFetch = useCallback(() => {
+  const onBack = useCallback(() => {
     dispatch(resetRadius());
     dispatch(resetSearchPlaces());
-  }, [dispatch]);
-
-  const onBack = useCallback(() => {
-    resetFetch();
     navigate(-1);
-  }, [navigate, resetFetch]);
+  }, [navigate, dispatch]);
 
   const fetchPlaces = useCallback(async () => {
     const radius = +selectedRadius!;
@@ -55,7 +51,7 @@ export function usePlacesFetch() {
     } finally {
       setIsLoading(false);
     }
-  }, [lat, lng, selectedCategories, searchQuery, selectedRadius]);
+  }, [dispatch, lat, lng, selectedCategories, searchQuery, selectedRadius]);
 
   useEffect(() => {
     fetchPlaces();
