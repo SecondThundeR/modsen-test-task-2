@@ -36,6 +36,7 @@ export const locationSlice = createSlice({
       state,
       action: PayloadAction<LocationState["locationRadius"]>,
     ) => {
+      if (isNaN(action.payload)) return;
       state.locationRadius = action.payload;
     },
     resetRadius: (state) => {
