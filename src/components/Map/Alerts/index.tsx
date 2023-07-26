@@ -5,7 +5,7 @@ import { AlertSuccess } from "@/components/AlertSuccess";
 
 interface MapAlertsProps {
   isLoading: boolean;
-  error: Error | null;
+  error: unknown;
 }
 
 export const MapAlerts = memo(function MapAlerts({
@@ -15,7 +15,7 @@ export const MapAlerts = memo(function MapAlerts({
   return (
     <div className="leaflet-top leaflet-right">
       <div className="toast toast-end toast-top">
-        {error && <AlertError error={error} />}
+        {error !== null && <AlertError error={error} />}
         {isLoading && <AlertSuccess>Loading data...</AlertSuccess>}
       </div>
     </div>
