@@ -17,7 +17,7 @@ const buildParams = (
   return {
     categories: !categories ? categoriesArray.join(",") : categories,
     filter: `circle:${lon},${lat},${radius}`,
-    limit: 100,
+    limit: 75,
     offset: 0,
     name: search || undefined,
     lang: "ru",
