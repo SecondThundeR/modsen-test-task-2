@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Bookmarks } from "@/components/Bookmarks";
-import { Login } from "@/components/Login";
-import { Search } from "@/components/Search";
-import { Signup } from "@/components/Signup";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 import { ROUTES } from "@/constants/routes";
 
+import { Bookmarks } from "@/pages/Bookmarks";
 import { Home } from "@/pages/Home";
+import { Login } from "@/pages/Login";
+import { Search } from "@/pages/Search";
+import { Signup } from "@/pages/Signup";
 
 export const Router = () => {
   return (

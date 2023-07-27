@@ -1,18 +1,15 @@
-import { PlaceDetails } from "@/components/PlaceDetails";
-import { BackButton } from "@/components/ui/BackButton";
 import { PlaceCard } from "@/components/ui/PlaceCard";
+import { PlaceDetails } from "@/components/ui/PlaceDetails";
 import { Sidebar } from "@/components/ui/Sidebar";
-import { Spinner } from "@/components/ui/Spinner";
 
 import { useRoute } from "@/hooks/map/useRoute";
 import { useBookmarks } from "@/hooks/places/useBookmarks";
 import { useSelectedPlace } from "@/hooks/places/useSelectedPlace";
-import { usePlacesFetch } from "@/hooks/search/usePlacesFetch";
 
+import { extractProperties } from "@/utils/bookmarks/extractProperties";
 import { isPlaceBookmarked } from "@/utils/bookmarks/isPlaceBookmarked";
 
-export function SearchResults() {
-  const { searchPlaces, isLoading, onBack } = usePlacesFetch();
+export function Bookmarks() {
   const { bookmarks, onBookmarkClick } = useBookmarks();
   const { selectedPlace, updatePlace, resetPlace } = useSelectedPlace();
   const { resetRouteData } = useRoute();
@@ -38,29 +35,27 @@ export function SearchResults() {
           isBookmarked={isSelectedPlaceBookmarked}
           {...selectedPlace}
         />
-      ) : isLoading ? (
-        <Spinner />
       ) : (
         <>
-          <BackButton onBack={onBack} />
-
-          {searchPlaces?.map((place) => {
-            const { place_id } = place.properties;
-            const isBookmarked = isPlaceBookmarked(bookmarks, place.properties);
+          <h1 className="text-xl font-bold">Bookmarks:</h1>
+          {bookmarks?.length === 0 && <h1>You have no bookmarks yet</h1>}
+          {bookmarks?.map((bookmark) => {
+            const properties = extractProperties(bookmark);
+            const isBookmarked = isPlaceBookmarked(bookmarks, properties);
             const bookmarkPlace = () =>
               onBookmarkClick({
                 isBookmarked,
-                properties: place.properties,
+                properties,
               });
-            const setNewPlace = () => updatePlace(place.properties);
+            const setNewPlace = () => updatePlace(properties);
 
             return (
               <PlaceCard
-                key={place_id}
+                key={properties.place_id}
                 onBookmarkClick={bookmarkPlace}
                 onArrowClick={setNewPlace}
                 isBookmarked={isBookmarked}
-                {...place.properties}
+                {...properties}
               />
             );
           })}
