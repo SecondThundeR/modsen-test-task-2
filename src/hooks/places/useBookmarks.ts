@@ -1,12 +1,10 @@
-import { child, get, ref, update } from "firebase/database";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+import { useDatabase } from "@/hooks/firebase/useDatabase";
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
 import { PlacesProperties } from "@/schemas/geoapify";
-
-import { database } from "@/services/firebase/app";
 
 import {
   appendBookmark,
@@ -15,29 +13,22 @@ import {
 } from "@/store/bookmarks";
 
 export function useBookmarks() {
-  const userID = useAppSelector((state) => state.user.userData?.uid);
+  const { fetchData, updateData, removeData } = useDatabase();
   const { bookmarks } = useAppSelector((state) => state.bookmarks);
   const dispatch = useDispatch();
 
-  const userDBRef = userID ? ref(database, "users/" + userID) : null;
-
   const fetchBookmarks = useCallback(async () => {
-    if (!userDBRef || bookmarks !== null) return;
+    const data = await fetchData({
+      path: "bookmarks",
+      isArray: true,
+    });
+    if (!data) return;
 
-    try {
-      const snapshot = await get(child(userDBRef, "bookmarks"));
-      if (snapshot.exists()) {
-        dispatch(setBookmarks([snapshot.exportVal()]));
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }, [dispatch, userDBRef]);
+    dispatch(setBookmarks(data));
+  }, [dispatch, fetchData]);
 
   const addBookmark = useCallback(
     async (properties: PlacesProperties) => {
-      if (!userDBRef) return;
-
       const {
         name,
         address_line2,
@@ -48,39 +39,33 @@ export function useBookmarks() {
         datasource,
       } = properties;
 
-      try {
-        const bookmark = {
-          name: name ?? "",
-          address_line2,
-          lat,
-          lon,
-          datasource,
-        };
-        await update(child(userDBRef, "bookmarks"), {
-          [place_id]: { ...bookmark, categories: categories.join(",") },
-        });
-        dispatch(appendBookmark({ [place_id]: { ...bookmark, categories } }));
-      } catch (error) {
-        console.error(error);
-      }
+      const bookmark = {
+        name: name ?? "",
+        address_line2,
+        lat,
+        lon,
+        datasource,
+      };
+
+      await updateData({
+        path: "bookmarks",
+        key: place_id,
+        data: { ...bookmark, categories: categories.join(",") },
+      });
+      dispatch(appendBookmark({ [place_id]: { ...bookmark, categories } }));
     },
-    [dispatch, userDBRef],
+    [dispatch, updateData],
   );
 
   const deleteBookmark = useCallback(
     async (bookmarkID: string) => {
-      if (!userDBRef) return;
-
-      try {
-        await update(child(userDBRef, "bookmarks"), {
-          [bookmarkID]: null,
-        });
-        dispatch(removeBookmark(bookmarkID));
-      } catch (error) {
-        console.error(error);
-      }
+      await removeData({
+        path: "bookmarks",
+        key: bookmarkID,
+      });
+      dispatch(removeBookmark(bookmarkID));
     },
-    [dispatch, userDBRef],
+    [dispatch, removeData],
   );
 
   const onBookmarkClick = useCallback(
@@ -90,6 +75,7 @@ export function useBookmarks() {
     }) => {
       const { isBookmarked, properties } = options;
       if (!properties) return;
+
       isBookmarked
         ? await deleteBookmark(properties.place_id)
         : await addBookmark(properties);
@@ -98,7 +84,7 @@ export function useBookmarks() {
   );
 
   useEffect(() => {
-    if (!userID) return;
+    if (!bookmarks) return;
 
     fetchBookmarks();
   }, []);
