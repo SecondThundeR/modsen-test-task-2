@@ -20,7 +20,7 @@ export const PlaceMarker = memo(function PlaceMarker({
 }: PlaceMarkerProperties) {
   const placeName = formatPlaceMarkerDetails(name, address_line2);
   return (
-    <Marker position={[lat, lon]} title={name ?? undefined} icon={icon}>
+    <Marker position={[lat, lon]} title={placeName} icon={icon}>
       {placeName && <Popup>{placeName}</Popup>}
     </Marker>
   );

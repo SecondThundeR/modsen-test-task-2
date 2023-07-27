@@ -32,10 +32,11 @@ export const PlaceDetails = memo(function PlaceDetails({
   onBack,
   onBookmarkClick,
 }: PlaceDetailsProps) {
+  const placeName = name ?? raw["name:ru"] ?? "";
   const { placeDetails, error, isLoading } = usePlaceDetails(
     lat,
     lon,
-    name ?? raw["name:ru"] ?? "",
+    placeName,
   );
   const {
     routeData,
@@ -64,18 +65,16 @@ export const PlaceDetails = memo(function PlaceDetails({
                 <CategoryIcons key={category} category={category} />
               ))}
             </div>
-            <img
-              className="h-60 w-full rounded-xl bg-base-content object-cover"
-              width={500}
-              height={300}
-              src={
-                imageData
-                  ? imageData.prefix + "original" + imageData.suffix
-                  : ""
-              }
-              alt={name ?? ""}
-              title={name ?? ""}
-            />
+            {imageData && (
+              <img
+                className="h-60 w-full rounded-xl object-cover"
+                width={500}
+                height={300}
+                src={imageData.prefix + "original" + imageData.suffix}
+                alt={placeName}
+                title={placeName}
+              />
+            )}
           </div>
           <h1 className="line-clamp-2 text-2xl font-bold">{name}</h1>
           {address_line2 && <p className="opacity-80">{address_line2}</p>}
