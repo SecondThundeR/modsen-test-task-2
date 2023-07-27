@@ -86,7 +86,7 @@ export function useBookmarks() {
   const onBookmarkClick = useCallback(
     async (options: {
       isBookmarked?: boolean;
-      properties: PlacesProperties;
+      properties?: PlacesProperties | null;
     }) => {
       const { isBookmarked, properties } = options;
       if (!properties) return;
