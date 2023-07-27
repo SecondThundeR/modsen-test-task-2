@@ -2,7 +2,7 @@ import cn from "classnames";
 import { HTMLAttributes, PropsWithChildren, memo } from "react";
 import { NavLink, NavLinkProps } from "react-router-dom";
 
-const BUTTON_STYLES = "btn btn-primary";
+import { Button } from "@/components/ui/Button";
 
 interface SidebarButtonProps
   extends PropsWithChildren,
@@ -19,9 +19,9 @@ export const SidebarButton = memo(function SidebarButton({
 }: SidebarButtonProps) {
   if (!to)
     return (
-      <button className={cn(BUTTON_STYLES, "btn-outline")} onClick={onClick}>
+      <Button className="btn-outline" onClick={onClick}>
         {children}
-      </button>
+      </Button>
     );
 
   return (
@@ -29,7 +29,7 @@ export const SidebarButton = memo(function SidebarButton({
       to={to}
       className={({ isActive }) =>
         !unstyled
-          ? cn(BUTTON_STYLES, {
+          ? cn("btn btn-primary", {
               "btn-outline": !isActive,
             })
           : ""

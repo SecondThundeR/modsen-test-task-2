@@ -3,6 +3,7 @@ import { ReactComponent as XCircleIcon } from "@/assets/xCircle.svg";
 import { ReactComponent as ZoomMinusIcon } from "@/assets/zoomMinus.svg";
 import { ReactComponent as ZoomPlusIcon } from "@/assets/zoomPlus.svg";
 
+import { Button } from "@/components/ui/Button";
 import { Spinner } from "@/components/ui/Spinner";
 
 import { useMapControls } from "@/hooks/map/useMapControls";
@@ -17,11 +18,7 @@ export function MapControls() {
   return (
     <div className="leaflet-bottom leaflet-right">
       <div className="leaflet-control flex gap-2">
-        <button
-          className="btn btn-primary"
-          onClick={getLocation}
-          disabled={isLocating}
-        >
+        <Button onClick={getLocation} disabled={isLocating}>
           {isFailed ? (
             <XCircleIcon />
           ) : isLocating ? (
@@ -29,14 +26,14 @@ export function MapControls() {
           ) : (
             <LocationIcon />
           )}
-        </button>
+        </Button>
         <div>
-          <button className="btn btn-accent rounded-r-none" onClick={zoomIn}>
+          <Button isAccent className="rounded-r-none" onClick={zoomIn}>
             <ZoomPlusIcon />
-          </button>
-          <button className="btn btn-accent rounded-l-none" onClick={zoomOut}>
+          </Button>
+          <Button isAccent className="rounded-l-none" onClick={zoomOut}>
             <ZoomMinusIcon />
-          </button>
+          </Button>
         </div>
       </div>
     </div>

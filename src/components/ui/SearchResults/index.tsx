@@ -1,4 +1,4 @@
-import { BackButton } from "@/components/ui/BackButton";
+import { Button } from "@/components/ui/Button";
 import { PlaceCard } from "@/components/ui/PlaceCard";
 import { PlaceDetails } from "@/components/ui/PlaceDetails";
 import { Sidebar } from "@/components/ui/Sidebar";
@@ -42,7 +42,7 @@ export function SearchResults() {
         <Spinner />
       ) : (
         <>
-          <BackButton onBack={onBack} />
+          <Button onClick={onBack}>Go back</Button>
 
           {searchPlaces?.map((place) => {
             const { place_id } = place.properties;

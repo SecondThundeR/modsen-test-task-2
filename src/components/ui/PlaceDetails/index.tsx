@@ -5,8 +5,10 @@ import { ReactComponent as BookmarkFilledIcon } from "@/assets/bookmarkFilled.sv
 import { ReactComponent as LocationIcon } from "@/assets/location.svg";
 
 import { AlertError } from "@/components/ui/AlertError";
-import { BackButton } from "@/components/ui/BackButton";
+import { Button } from "@/components/ui/Button";
 import { CategoryIcons } from "@/components/ui/CategoryIcons";
+import { Heading } from "@/components/ui/Heading";
+import { PlaceNameHeading } from "@/components/ui/PlaceNameHeading";
 import { RouteCard } from "@/components/ui/RouteCard";
 import { Spinner } from "@/components/ui/Spinner";
 
@@ -56,12 +58,12 @@ export const PlaceDetails = memo(function PlaceDetails({
         <Spinner />
       ) : (
         <>
-          <BackButton onBack={onBack} />
+          <Button onClick={onBack}>Go back</Button>
           <AlertError error={error ?? routeError} />
 
           <div className="relative mb-2">
             <div className="absolute bottom-0 m-3 flex w-24">
-              {categories.map((category) => (
+              {categories?.map((category) => (
                 <CategoryIcons key={category} category={category} />
               ))}
             </div>
@@ -76,26 +78,23 @@ export const PlaceDetails = memo(function PlaceDetails({
               />
             )}
           </div>
-          <h1 className="line-clamp-2 text-2xl font-bold">{name}</h1>
+          <PlaceNameHeading>{name}</PlaceNameHeading>
           {address_line2 && <p className="opacity-80">{address_line2}</p>}
           {placeDetails?.rating && (
             <p className="text-primary">Rating: {placeDetails.rating}</p>
           )}
           <div className="mt-2 flex justify-between">
-            <button
-              className="btn btn-primary btn-outline"
-              onClick={onBookmarkClick}
-            >
+            <Button className="btn-outline" onClick={onBookmarkClick}>
               {isBookmarked ? <BookmarkFilledIcon /> : <BookmarkIcon />}
-            </button>
-            <button className="btn btn-primary" onClick={setRoute}>
+            </Button>
+            <Button onClick={setRoute}>
               {isLoadingRoute ? <Spinner /> : <LocationIcon />}
               {!routeData ? "Route" : "Reset route"}
-            </button>
+            </Button>
           </div>
           {routeData && (
             <div className="flex flex-col gap-2">
-              <h1 className="text-xl font-bold">Route details:</h1>
+              <Heading>Route details:</Heading>
               <RouteCard routeData={routeData} />
             </div>
           )}

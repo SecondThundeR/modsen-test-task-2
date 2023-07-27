@@ -1,6 +1,8 @@
+import { Heading } from "@/components/ui/Heading";
 import { PlaceCard } from "@/components/ui/PlaceCard";
 import { PlaceDetails } from "@/components/ui/PlaceDetails";
 import { Sidebar } from "@/components/ui/Sidebar";
+import { Subheading } from "@/components/ui/Subheading";
 
 import { useRoute } from "@/hooks/map/useRoute";
 import { useBookmarks } from "@/hooks/places/useBookmarks";
@@ -37,8 +39,10 @@ export function Bookmarks() {
         />
       ) : (
         <>
-          <h1 className="text-xl font-bold">Bookmarks:</h1>
-          {bookmarks?.length === 0 && <h1>You have no bookmarks yet</h1>}
+          <Heading>Bookmarks</Heading>
+          {bookmarks?.length === 0 && (
+            <Subheading>You have no bookmarks yet</Subheading>
+          )}
           {bookmarks?.map((bookmark) => {
             const properties = extractProperties(bookmark);
             const isBookmarked = isPlaceBookmarked(bookmarks, properties);

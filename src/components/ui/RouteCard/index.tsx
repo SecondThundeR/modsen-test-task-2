@@ -1,5 +1,8 @@
 import { memo } from "react";
 
+import { Heading } from "@/components/ui/Heading";
+import { Subheading } from "@/components/ui/Subheading";
+
 import { useRoute } from "@/hooks/map/useRoute";
 
 type RouteData = Pick<ReturnType<typeof useRoute>, "routeData">["routeData"];
@@ -18,16 +21,14 @@ export const RouteCard = memo(function RouteCard({
       <div className="flex w-full items-center gap-6">
         {distance && (
           <div>
-            <h1 className="text-xl font-bold">{distance / 1000} km</h1>
-            <p className="opacity-70">Distance</p>
+            <Heading>{distance / 1000} km</Heading>
+            <Subheading>Distance</Subheading>
           </div>
         )}
         {time && (
           <div>
-            <h1 className="text-xl font-bold">
-              {Math.ceil(time / 60)} minutes
-            </h1>
-            <p className="opacity-70">Approximate time</p>
+            <Heading>{Math.ceil(time / 60)} minutes</Heading>
+            <Subheading>Approximate time</Subheading>
           </div>
         )}
       </div>

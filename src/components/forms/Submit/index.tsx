@@ -1,5 +1,6 @@
 import { PropsWithChildren, memo } from "react";
 
+import { Button } from "@/components/ui/Button";
 import { Spinner } from "@/components/ui/Spinner";
 
 export const Submit = memo(function FormSubmit({
@@ -7,9 +8,9 @@ export const Submit = memo(function FormSubmit({
   isLoading = false,
 }: PropsWithChildren<{ isLoading?: boolean }>) {
   return (
-    <button type="submit" className="btn btn-primary" disabled={isLoading}>
+    <Button type="submit" className="btn btn-primary" disabled={isLoading}>
       {isLoading && <Spinner />}
       {children}
-    </button>
+    </Button>
   );
 });
