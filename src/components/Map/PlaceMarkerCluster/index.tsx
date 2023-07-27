@@ -1,7 +1,7 @@
 import { memo } from "react";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
-import { PlaceMarker } from "@/components/PlaceMarker";
+import { PlaceMarker } from "@/components/map/PlaceMarker";
 
 import {
   categoriesArray,

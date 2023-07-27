@@ -1,7 +1,7 @@
 import { ReactComponent as SearchIcon } from "@/assets/search.svg";
 
-import { Form } from "@/components/Form";
 import { SearchResults } from "@/components/SearchResults";
+import { Form } from "@/components/forms/Form";
 
 import { useSearch } from "@/hooks/search/useSearch";
 

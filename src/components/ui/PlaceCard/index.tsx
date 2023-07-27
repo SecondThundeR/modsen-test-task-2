@@ -4,7 +4,7 @@ import { ReactComponent as ArrowRightIcon } from "@/assets/arrowRight.svg";
 import { ReactComponent as BookmarkIcon } from "@/assets/bookmark.svg";
 import { ReactComponent as BookmarkFilledIcon } from "@/assets/bookmarkFilled.svg";
 
-import { CategoryIcons } from "@/components/CategoryIcons";
+import { CategoryIcons } from "@/components/ui/CategoryIcons";
 
 import { PlacesProperties } from "@/schemas/geoapify";
 

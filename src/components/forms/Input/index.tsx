@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, PropsWithChildren, memo } from "react";
 
-interface FormInputProps
+interface InputProps
   extends PropsWithChildren,
     Pick<
       InputHTMLAttributes<HTMLInputElement>,
@@ -14,7 +14,7 @@ interface FormInputProps
       | "defaultValue"
     > {}
 
-export const FormInput = memo(function FormInput(props: FormInputProps) {
+export const Input = memo(function FormInput(props: InputProps) {
   const { children, ...inputProps } = props;
 
   return (

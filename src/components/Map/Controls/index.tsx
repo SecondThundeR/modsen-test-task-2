@@ -3,7 +3,7 @@ import { ReactComponent as XCircleIcon } from "@/assets/xCircle.svg";
 import { ReactComponent as ZoomMinusIcon } from "@/assets/zoomMinus.svg";
 import { ReactComponent as ZoomPlusIcon } from "@/assets/zoomPlus.svg";
 
-import { Spinner } from "@/components/Spinner";
+import { Spinner } from "@/components/ui/Spinner";
 
 import { useMapControls } from "@/hooks/map/useMapControls";
 

@@ -1,4 +1,4 @@
-import { PlaceMarkerCluster } from "@/components/PlaceMarkerCluster";
+import { PlaceMarkerCluster } from "@/components/map/PlaceMarkerCluster";
 
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 

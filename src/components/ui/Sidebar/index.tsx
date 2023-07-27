@@ -1,8 +1,8 @@
 import { PropsWithChildren, memo } from "react";
 
-import { SidebarButton } from "@/components/Sidebar/SidebarButton";
-import { SidebarButtonWrapper } from "@/components/Sidebar/SidebarButtonWrapper";
-import { SidebarPageWrapper } from "@/components/Sidebar/SidebarPageWrapper";
+import { SidebarButton } from "@/components/ui/Sidebar/Button";
+import { SidebarButtonWrapper } from "@/components/ui/Sidebar/ButtonWrapper";
+import { SidebarPageWrapper } from "@/components/ui/Sidebar/PageWrapper";
 
 const MemoizedSidebar = memo(function Sidebar({ children }: PropsWithChildren) {
   return (

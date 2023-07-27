@@ -1,7 +1,7 @@
 import { memo } from "react";
 
-import { AlertError } from "@/components/AlertError";
-import { AlertSuccess } from "@/components/AlertSuccess";
+import { AlertError } from "@/components/ui/AlertError";
+import { AlertSuccess } from "@/components/ui/AlertSuccess";
 
 interface MapAlertsProps {
   isLoading: boolean;

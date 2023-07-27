@@ -10,11 +10,11 @@ import { ReactComponent as LogoutIcon } from "@/assets/logout.svg";
 import { ReactComponent as SearchIcon } from "@/assets/search.svg";
 import { ReactComponent as ShowIcon } from "@/assets/show.svg";
 
-import { AvatarIcon } from "@/components/AvatarIcon";
-import { Map } from "@/components/Map";
-import { OverlayContainer } from "@/components/OverlayContainer";
-import { Sidebar } from "@/components/Sidebar";
-import { Spinner } from "@/components/Spinner";
+import { Map } from "@/components/map";
+import { AvatarIcon } from "@/components/ui/AvatarIcon";
+import { OverlayContainer } from "@/components/ui/OverlayContainer";
+import { Sidebar } from "@/components/ui/Sidebar";
+import { Spinner } from "@/components/ui/Spinner";
 
 import { ROUTES } from "@/constants/router/routes";
 

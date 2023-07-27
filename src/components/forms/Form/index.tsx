@@ -1,9 +1,9 @@
 import cn from "classnames";
 import { HTMLAttributes, PropsWithChildren, memo } from "react";
 
-import { FormCategorySelect } from "@/components/Form/FormCategorySelect";
-import { FormInput } from "@/components/Form/FormInput";
-import { FormSubmit } from "@/components/Form/FormSubmit";
+import { CategorySelect } from "@/components/forms/CategorySelect";
+import { Input } from "@/components/forms/Input";
+import { Submit } from "@/components/forms/Submit";
 
 interface FormProps
   extends PropsWithChildren,
@@ -29,7 +29,7 @@ const MemoizedForm = memo(function Form({
 });
 
 export const Form = Object.assign(MemoizedForm, {
-  Input: FormInput,
-  Submit: FormSubmit,
-  CategorySelect: FormCategorySelect,
+  Input,
+  Submit,
+  CategorySelect,
 });

@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { Bookmarks } from "@/components/Bookmarks";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Home } from "@/components/Home";
 import { Login } from "@/components/Login";
 import { Search } from "@/components/Search";
 import { Signup } from "@/components/Signup";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 import { ROUTES } from "@/constants/router/routes";
 

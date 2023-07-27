@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-import { AlertError } from "@/components/AlertError";
-import { Form } from "@/components/Form";
+import { Form } from "@/components/forms/Form";
+import { AlertError } from "@/components/ui/AlertError";
 
 import { ROUTES } from "@/constants/router/routes";
 

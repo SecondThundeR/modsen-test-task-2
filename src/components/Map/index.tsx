@@ -1,10 +1,10 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 
-import { MapAlerts } from "@/components/Map/Alerts";
-import { MapControls } from "@/components/Map/Controls";
-import { MapPlaces } from "@/components/Map/Places";
-import { MapRoute } from "@/components/Map/Route";
-import { MapUserLocation } from "@/components/Map/UserLocation";
+import { MapAlerts } from "@/components/map/Alerts";
+import { MapControls } from "@/components/map/Controls";
+import { MapPlaces } from "@/components/map/Places";
+import { MapRoute } from "@/components/map/Route";
+import { MapUserLocation } from "@/components/map/UserLocation";
 
 import { DEFAULT_ZOOM } from "@/constants/leaflet/defaultMapValues";
 

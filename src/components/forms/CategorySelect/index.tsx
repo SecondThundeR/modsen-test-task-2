@@ -7,7 +7,7 @@ import {
 } from "@/constants/geoapify/categories";
 import { PLACE_ICON_CLASSES } from "@/constants/leaflet/icons";
 
-export function FormCategorySelect() {
+export function CategorySelect() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const onCategorySelect = (category: string) => {

@@ -1,8 +1,8 @@
-import { BackButton } from "@/components/BackButton";
-import { PlaceCard } from "@/components/PlaceCard";
 import { PlaceDetails } from "@/components/PlaceDetails";
-import { Sidebar } from "@/components/Sidebar";
-import { Spinner } from "@/components/Spinner";
+import { BackButton } from "@/components/ui/BackButton";
+import { PlaceCard } from "@/components/ui/PlaceCard";
+import { Sidebar } from "@/components/ui/Sidebar";
+import { Spinner } from "@/components/ui/Spinner";
 
 import { useRoute } from "@/hooks/map/useRoute";
 import { useBookmarks } from "@/hooks/places/useBookmarks";

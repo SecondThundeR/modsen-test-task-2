@@ -4,11 +4,11 @@ import { ReactComponent as BookmarkIcon } from "@/assets/bookmark.svg";
 import { ReactComponent as BookmarkFilledIcon } from "@/assets/bookmarkFilled.svg";
 import { ReactComponent as LocationIcon } from "@/assets/location.svg";
 
-import { AlertError } from "@/components/AlertError";
-import { BackButton } from "@/components/BackButton";
-import { CategoryIcons } from "@/components/CategoryIcons";
-import { RouteCard } from "@/components/RouteCard";
-import { Spinner } from "@/components/Spinner";
+import { AlertError } from "@/components/ui/AlertError";
+import { BackButton } from "@/components/ui/BackButton";
+import { CategoryIcons } from "@/components/ui/CategoryIcons";
+import { RouteCard } from "@/components/ui/RouteCard";
+import { Spinner } from "@/components/ui/Spinner";
 
 import { useRoute } from "@/hooks/map/useRoute";
 import { usePlaceDetails } from "@/hooks/places/usePlaceDetails";

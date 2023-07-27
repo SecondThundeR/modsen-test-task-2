@@ -1,8 +1,8 @@
 import { PropsWithChildren, memo } from "react";
 
-import { Spinner } from "@/components/Spinner";
+import { Spinner } from "@/components/ui/Spinner";
 
-export const FormSubmit = memo(function FormSubmit({
+export const Submit = memo(function FormSubmit({
   children,
   isLoading = false,
 }: PropsWithChildren<{ isLoading?: boolean }>) {
