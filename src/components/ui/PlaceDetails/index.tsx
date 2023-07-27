@@ -11,6 +11,7 @@ import { Heading } from "@/components/ui/Heading";
 import { PlaceNameHeading } from "@/components/ui/PlaceNameHeading";
 import { RouteCard } from "@/components/ui/RouteCard";
 import { Spinner } from "@/components/ui/Spinner";
+import { Subheading } from "@/components/ui/Subheading";
 
 import { useRoute } from "@/hooks/map/useRoute";
 import { usePlaceDetails } from "@/hooks/places/usePlaceDetails";
@@ -61,25 +62,23 @@ export const PlaceDetails = memo(function PlaceDetails({
           <Button onClick={onBack}>Go back</Button>
           <AlertError error={error ?? routeError} />
 
-          <div className="relative mb-2">
-            <div className="absolute bottom-0 m-3 flex w-24">
-              {categories?.map((category) => (
-                <CategoryIcons key={category} category={category} />
-              ))}
-            </div>
-            {imageData && (
-              <img
-                className="h-60 w-full rounded-xl object-cover"
-                width={500}
-                height={300}
-                src={imageData.prefix + "original" + imageData.suffix}
-                alt={placeName}
-                title={placeName}
-              />
-            )}
+          {imageData && (
+            <img
+              className="h-60 w-full rounded-xl object-cover"
+              width={500}
+              height={300}
+              src={imageData.prefix + "original" + imageData.suffix}
+              alt={placeName}
+              title={placeName}
+            />
+          )}
+          <div className="flex flex-col gap-2">
+            {categories?.map((category) => (
+              <CategoryIcons key={category} category={category} />
+            ))}
+            <PlaceNameHeading>{name}</PlaceNameHeading>
           </div>
-          <PlaceNameHeading>{name}</PlaceNameHeading>
-          {address_line2 && <p className="opacity-80">{address_line2}</p>}
+          {address_line2 && <Subheading>{address_line2}</Subheading>}
           {placeDetails?.rating && (
             <p className="text-primary">Rating: {placeDetails.rating}</p>
           )}
