@@ -11,7 +11,7 @@ const config = {
     "^@/constants/(.*)$",
     "^@/hooks/(.*)$",
     "^@/pages/(.*)$",
-    "^@/routes/(.*)$",
+    "^@/router/(.*)$",
     "^@/schemas/(.*)$",
     "^@/services/(.*)$",
     "^@/store/(.*)$",
