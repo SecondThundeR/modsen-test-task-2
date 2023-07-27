@@ -17,7 +17,7 @@ import {
   religionIcon,
   shopIcon,
   sportIcon,
-} from "@/constants/leaflet/icons";
+} from "@/constants/markerIcons";
 
 interface CategoryInfo {
   url: string;

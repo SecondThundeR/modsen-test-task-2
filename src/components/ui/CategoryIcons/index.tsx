@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-import { categoriesMapping } from "@/constants/geoapify/categories";
+import { categoriesMapping } from "@/constants/placeCategories";
 
 interface CategoryIconsProps {
   category: string;

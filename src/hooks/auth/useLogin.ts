@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { FormEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ROUTES } from "@/constants/router/routes";
+import { ROUTES } from "@/constants/routes";
 
 import { auth } from "@/services/firebase/app";
 

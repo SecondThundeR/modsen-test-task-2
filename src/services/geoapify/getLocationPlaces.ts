@@ -1,5 +1,5 @@
-import { categoriesArray } from "@/constants/geoapify/categories";
-import { PLACES_ENDPOINT } from "@/constants/geoapify/links";
+import { PLACES_ENDPOINT } from "@/constants/geoapifyEndpoints";
+import { categoriesArray } from "@/constants/placeCategories";
 
 import { PlacesSchema } from "@/schemas/geoapify";
 

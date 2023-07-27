@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { BASE_URL } from "@/constants/foursquare/links";
+import { BASE_URL } from "@/constants/foursquareEndpoints";
 
 import { PlaceSchema } from "@/schemas/foursquare";
 

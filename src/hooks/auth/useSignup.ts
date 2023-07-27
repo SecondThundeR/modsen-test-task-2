@@ -3,7 +3,7 @@ import { ref, set } from "firebase/database";
 import { FormEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ROUTES } from "@/constants/router/routes";
+import { ROUTES } from "@/constants/routes";
 
 import { auth, database } from "@/services/firebase/app";
 

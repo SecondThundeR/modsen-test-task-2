@@ -1,11 +1,11 @@
 import cn from "classnames";
 import { useState } from "react";
 
+import { PLACE_ICON_CLASSES } from "@/constants/markerIcons";
 import {
   categoriesArray,
   categoriesMapping,
-} from "@/constants/geoapify/categories";
-import { PLACE_ICON_CLASSES } from "@/constants/leaflet/icons";
+} from "@/constants/placeCategories";
 
 export function CategorySelect() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);

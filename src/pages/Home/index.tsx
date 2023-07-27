@@ -16,7 +16,7 @@ import { OverlayContainer } from "@/components/ui/OverlayContainer";
 import { Sidebar } from "@/components/ui/Sidebar";
 import { Spinner } from "@/components/ui/Spinner";
 
-import { ROUTES } from "@/constants/router/routes";
+import { ROUTES } from "@/constants/routes";
 
 import { useAuthUser } from "@/hooks/auth/useAuthUser";
 import { useReset } from "@/hooks/map/useReset";

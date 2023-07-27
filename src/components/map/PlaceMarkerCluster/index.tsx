@@ -3,11 +3,11 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 
 import { PlaceMarker } from "@/components/map/PlaceMarker";
 
+import { createIcon } from "@/constants/markerIcons";
 import {
   categoriesArray,
   categoriesMapping,
-} from "@/constants/geoapify/categories";
-import { createIcon } from "@/constants/leaflet/icons";
+} from "@/constants/placeCategories";
 
 import { PlacesState } from "@/store/places";
 

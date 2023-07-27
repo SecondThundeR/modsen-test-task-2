@@ -1,4 +1,4 @@
-import { ROUTING_ENDPOINT } from "@/constants/geoapify/links";
+import { ROUTING_ENDPOINT } from "@/constants/geoapifyEndpoints";
 
 import { Route, RouteSchema } from "@/schemas/geoapify";
 

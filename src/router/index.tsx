@@ -6,7 +6,7 @@ import { Search } from "@/components/Search";
 import { Signup } from "@/components/Signup";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
-import { ROUTES } from "@/constants/router/routes";
+import { ROUTES } from "@/constants/routes";
 
 import { Home } from "@/pages/Home";
 

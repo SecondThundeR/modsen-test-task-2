@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { SEARCH_ENDPOINT } from "@/constants/foursquare/links";
+import { SEARCH_ENDPOINT } from "@/constants/foursquareEndpoints";
 
 import { SearchSchema } from "@/schemas/foursquare";
 

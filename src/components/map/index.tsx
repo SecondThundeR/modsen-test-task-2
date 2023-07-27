@@ -6,7 +6,7 @@ import { MapPlaces } from "@/components/map/Places";
 import { MapRoute } from "@/components/map/Route";
 import { MapUserLocation } from "@/components/map/UserLocation";
 
-import { DEFAULT_ZOOM } from "@/constants/leaflet/defaultMapValues";
+import { DEFAULT_ZOOM } from "@/constants/mapDefaultValues";
 
 import { useLocationFetch } from "@/hooks/map/useLocationFetch";
 import { useAppSelector } from "@/hooks/redux/useAppSelector";

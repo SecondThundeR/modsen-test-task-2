@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Form } from "@/components/forms/Form";
 import { AlertError } from "@/components/ui/AlertError";
 
-import { ROUTES } from "@/constants/router/routes";
+import { ROUTES } from "@/constants/routes";
 
 import { useLogin } from "@/hooks/auth/useLogin";
 

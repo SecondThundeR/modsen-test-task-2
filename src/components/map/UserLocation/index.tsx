@@ -1,7 +1,7 @@
 import { Circle, LayerGroup, Marker, useMap, useMapEvent } from "react-leaflet";
 
-import { COLORS } from "@/constants/leaflet/colors";
-import { userIcon } from "@/constants/leaflet/icons";
+import { COLORS } from "@/constants/mapColors";
+import { userIcon } from "@/constants/markerIcons";
 
 import { useAppDispatch } from "@/hooks/redux/useAppDispatch";
 import { useAppSelector } from "@/hooks/redux/useAppSelector";

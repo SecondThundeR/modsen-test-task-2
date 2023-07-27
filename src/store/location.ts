@@ -4,7 +4,7 @@ import {
   DEFAULT_RADIUS_METERS,
   LONDON_LATITUDE,
   LONDON_LONGITUDE,
-} from "@/constants/leaflet/defaultMapValues";
+} from "@/constants/mapDefaultValues";
 
 export interface LocationState {
   locationCoordinates: {

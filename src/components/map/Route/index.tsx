@@ -1,6 +1,6 @@
 import { GeoJSON, Marker } from "react-leaflet";
 
-import { COLORS } from "@/constants/leaflet/colors";
+import { COLORS } from "@/constants/mapColors";
 
 import { useAppSelector } from "@/hooks/redux/useAppSelector";
 
