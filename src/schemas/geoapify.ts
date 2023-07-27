@@ -22,6 +22,11 @@ export const PlacesSchema = z.object({
   ),
 });
 
+const WaypointSchema = z.object({
+  lat: z.number(),
+  lon: z.number(),
+});
+
 export const RouteSchema = z.object({
   features: z.array(
     z.object({
@@ -37,12 +42,7 @@ export const RouteSchema = z.object({
     }),
   ),
   properties: z.object({
-    waypoints: z.array(
-      z.object({
-        lat: z.number(),
-        lon: z.number(),
-      }),
-    ),
+    waypoints: z.array(WaypointSchema),
   }),
   type: z.literal("FeatureCollection"),
 });
@@ -50,3 +50,4 @@ export const RouteSchema = z.object({
 export type PlacesProperties = z.infer<typeof PlacesPropertiesSchema>;
 export type Places = z.infer<typeof PlacesSchema>["features"];
 export type Route = z.infer<typeof RouteSchema>;
+export type Waypoint = z.infer<typeof WaypointSchema>;
