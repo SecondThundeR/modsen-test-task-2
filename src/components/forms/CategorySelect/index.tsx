@@ -1,6 +1,8 @@
 import cn from "classnames";
 import { useState } from "react";
 
+import { Input } from "@/components/forms/Input";
+
 import { PLACE_ICON_CLASSES } from "@/constants/markerIcons";
 import {
   categoriesArray,
@@ -20,7 +22,7 @@ export function CategorySelect() {
 
   return (
     <div className="form-control max-h-96 gap-2 overflow-auto rounded-xl border-2 border-[#c4c4c4] px-3 py-2">
-      <input
+      <Input
         id="categories"
         name="categories"
         type="hidden"
