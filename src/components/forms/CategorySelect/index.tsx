@@ -1,9 +1,8 @@
-import cn from "classnames";
 import { useState } from "react";
 
 import { Input } from "@/components/forms/Input";
+import { CategorySelectItem } from "@/components/ui/CategorySelectItem";
 
-import { PLACE_ICON_CLASSES } from "@/constants/markerIcons";
 import {
   categoriesArray,
   categoriesMapping,
@@ -34,24 +33,12 @@ export function CategorySelect() {
         const selectCategory = () => onCategorySelect(category);
 
         return (
-          <div
+          <CategorySelectItem
             key={category}
-            className={cn("flex items-center gap-4", {
-              "opacity-50 hover:opacity-70": !isSelected,
-              "hover:opacity-80": isSelected,
-            })}
-            onClick={selectCategory}
-          >
-            <img
-              width={40}
-              height={40}
-              src={categoryData.url}
-              title={categoryData.name}
-              alt={categoryData.name}
-              className={PLACE_ICON_CLASSES}
-            />
-            <span className="font-medium">{categoryData.name}</span>
-          </div>
+            isSelected={isSelected}
+            selectCategory={selectCategory}
+            {...categoryData}
+          />
         );
       })}
     </div>
