@@ -12,6 +12,7 @@ interface InputProps
       | "min"
       | "max"
       | "defaultValue"
+      | "value"
     > {}
 
 export const Input = memo(function FormInput(props: InputProps) {
