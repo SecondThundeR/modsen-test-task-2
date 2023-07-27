@@ -1,9 +1,9 @@
 import { PlacesProperties } from "@/schemas/geoapify";
 
-import { Bookmark } from "@/store/bookmarks";
+import { BookmarksState } from "@/store/bookmarks";
 
 export function getBookmarkIndex(
-  bookmarks: Bookmark[],
+  bookmarks: NonNullable<BookmarksState["bookmarks"]>,
   place_id: PlacesProperties["place_id"],
 ) {
   return bookmarks.findIndex(

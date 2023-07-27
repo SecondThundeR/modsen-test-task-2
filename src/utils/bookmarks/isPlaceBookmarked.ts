@@ -1,13 +1,13 @@
 import { PlacesProperties } from "@/schemas/geoapify";
 
-import { Bookmark } from "@/store/bookmarks";
+import { BookmarksState } from "@/store/bookmarks";
 
 import { getBookmarkIndex } from "./getBookmarkIndex";
 
 export function isPlaceBookmarked(
-  bookmarks: Bookmark[],
+  bookmarks: BookmarksState["bookmarks"],
   placeProperties?: PlacesProperties | null,
 ) {
-  if (!placeProperties) return false;
+  if (!bookmarks || !placeProperties) return false;
   return getBookmarkIndex(bookmarks, placeProperties.place_id) !== -1;
 }

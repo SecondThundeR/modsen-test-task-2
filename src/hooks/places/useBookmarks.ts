@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { useDatabase } from "@/hooks/firebase/useDatabase";
@@ -12,19 +12,28 @@ import {
   setBookmarks,
 } from "@/store/bookmarks";
 
+import { convertDatabaseBookmarks } from "@/utils/bookmarks/convertDatabaseBookmarks";
+
 export function useBookmarks() {
+  const [isLoading, setIsLoading] = useState(false);
   const { fetchData, updateData, removeData } = useDatabase();
   const { bookmarks } = useAppSelector((state) => state.bookmarks);
   const dispatch = useDispatch();
 
   const fetchBookmarks = useCallback(async () => {
+    setIsLoading(true);
     const data = await fetchData({
       path: "bookmarks",
       isArray: true,
     });
-    if (!data) return;
+    if (!data) {
+      setIsLoading(false);
+      return;
+    }
 
-    dispatch(setBookmarks(data));
+    const convertedData = convertDatabaseBookmarks(data);
+    dispatch(setBookmarks(convertedData));
+    setIsLoading(false);
   }, [dispatch, fetchData]);
 
   const addBookmark = useCallback(
@@ -84,10 +93,10 @@ export function useBookmarks() {
   );
 
   useEffect(() => {
-    if (!bookmarks) return;
+    if (bookmarks !== null) return;
 
     fetchBookmarks();
   }, []);
 
-  return { bookmarks, onBookmarkClick };
+  return { bookmarks, isLoading, onBookmarkClick };
 }

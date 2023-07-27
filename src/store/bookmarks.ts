@@ -9,11 +9,11 @@ export interface Bookmark {
 }
 
 export interface BookmarksState {
-  bookmarks: Bookmark[];
+  bookmarks: Bookmark[] | null;
 }
 
 const initialState: BookmarksState = {
-  bookmarks: [],
+  bookmarks: null,
 };
 
 export const bookmarksSlice = createSlice({
@@ -24,9 +24,12 @@ export const bookmarksSlice = createSlice({
       state,
       action: PayloadAction<BookmarksState["bookmarks"]>,
     ) => {
+      console.log("Setting bookmarks:", action.payload);
       state.bookmarks = action.payload;
     },
     appendBookmark: (state, action: PayloadAction<Bookmark>) => {
+      if (!state.bookmarks) state.bookmarks = [];
+
       const bookmarkIndex = getBookmarkIndex(
         state.bookmarks,
         Object.keys(action.payload)[0],
@@ -34,6 +37,8 @@ export const bookmarksSlice = createSlice({
       if (bookmarkIndex === -1) state.bookmarks.push(action.payload);
     },
     removeBookmark: (state, action: PayloadAction<string>) => {
+      if (!state.bookmarks) return;
+
       const bookmarkIndex = getBookmarkIndex(state.bookmarks, action.payload);
       if (bookmarkIndex !== -1) state.bookmarks.splice(bookmarkIndex, 1);
     },
