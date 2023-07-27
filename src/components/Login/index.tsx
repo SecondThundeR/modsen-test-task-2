@@ -7,7 +7,7 @@ import { ROUTES } from "@/constants/router/routes";
 
 import { useLogin } from "@/hooks/auth/useLogin";
 
-export const Login = () => {
+export function Login() {
   const { isLoading, error, onSubmit } = useLogin();
 
   return (
@@ -46,4 +46,4 @@ export const Login = () => {
       </p>
     </div>
   );
-};
+}

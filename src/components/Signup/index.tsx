@@ -7,7 +7,7 @@ import { ROUTES } from "@/constants/router/routes";
 
 import { useSignup } from "@/hooks/auth/useSignup";
 
-export const Signup = () => {
+export function Signup() {
   const { isLoading, error, onSubmit } = useSignup();
 
   return (
@@ -54,4 +54,4 @@ export const Signup = () => {
       </p>
     </div>
   );
-};
+}

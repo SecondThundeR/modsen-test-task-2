@@ -21,7 +21,7 @@ import { ROUTES } from "@/constants/router/routes";
 import { useAuthUser } from "@/hooks/auth/useAuthUser";
 import { useReset } from "@/hooks/map/useReset";
 
-export const Home = () => {
+export function Home() {
   const [isHidden, setIsHidden] = useState(false);
   const { userData, isFetching, handleLogout } = useAuthUser();
 
@@ -77,4 +77,4 @@ export const Home = () => {
       <Map />
     </div>
   );
-};
+}
