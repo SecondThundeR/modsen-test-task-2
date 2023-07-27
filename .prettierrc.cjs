@@ -10,6 +10,7 @@ const config = {
     "^@/components/(.*)$",
     "^@/constants/(.*)$",
     "^@/hooks/(.*)$",
+    "^@/pages/(.*)$",
     "^@/routes/(.*)$",
     "^@/schemas/(.*)$",
     "^@/services/(.*)$",

@@ -26,6 +26,7 @@
       "@/components/*": ["src/components/*"],
       "@/constants/*": ["src/constants/*"],
       "@/hooks/*": ["src/hooks/*"],
+      "@/pages/*": ["src/pages/*"],
       "@/routes/*": ["src/routes/*"],
       "@/schemas/*": ["src/schemas/*"],
       "@/services/*": ["src/services/*"],
