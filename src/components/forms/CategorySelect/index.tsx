@@ -29,6 +29,7 @@ export function CategorySelect() {
       {categoriesArray.map((category) => {
         const categoryData = categoriesMapping[category];
         const isSelected = selectedCategories.includes(category);
+        const selectCategory = () => onCategorySelect(category);
 
         return (
           <div
@@ -37,7 +38,7 @@ export function CategorySelect() {
               "opacity-50 hover:opacity-70": !isSelected,
               "hover:opacity-80": isSelected,
             })}
-            onClick={() => onCategorySelect(category)}
+            onClick={selectCategory}
           >
             <img
               width={40}

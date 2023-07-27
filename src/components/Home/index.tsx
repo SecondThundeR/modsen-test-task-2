@@ -27,6 +27,10 @@ export const Home = () => {
 
   useReset();
 
+  const hideElements = () => {
+    setIsHidden((prev) => !prev);
+  };
+
   return (
     <div className="min-h-screen">
       <OverlayContainer>
@@ -44,11 +48,7 @@ export const Home = () => {
               </Sidebar.Button>
             )}
           </Sidebar.ButtonWrapper>
-          <Sidebar.Button
-            onClick={() => {
-              setIsHidden((prev) => !prev);
-            }}
-          >
+          <Sidebar.Button onClick={hideElements}>
             {isHidden ? <ShowIcon /> : <HideIcon />}
           </Sidebar.Button>
           {isFetching ? (

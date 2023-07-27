@@ -18,20 +18,23 @@ export function SearchResults() {
   const { resetRouteData } = useRoute();
   const isSelectedPlaceBookmarked = isPlaceBookmarked(bookmarks, selectedPlace);
 
+  const resetPlaceDetails = () => {
+    resetPlace();
+    resetRouteData();
+  };
+
+  const bookmarkSelectedPlace = () =>
+    onBookmarkClick({
+      isBookmarked: isSelectedPlaceBookmarked,
+      properties: selectedPlace,
+    });
+
   return (
     <Sidebar.PageWrapper>
       {selectedPlace ? (
         <PlaceDetails
-          onBack={() => {
-            resetPlace();
-            resetRouteData();
-          }}
-          onBookmarkClick={() =>
-            onBookmarkClick({
-              isBookmarked: isSelectedPlaceBookmarked,
-              properties: selectedPlace,
-            })
-          }
+          onBack={resetPlaceDetails}
+          onBookmarkClick={bookmarkSelectedPlace}
           isBookmarked={isSelectedPlaceBookmarked}
           {...selectedPlace}
         />
@@ -44,17 +47,18 @@ export function SearchResults() {
           {searchPlaces?.map((place) => {
             const { place_id } = place.properties;
             const isBookmarked = isPlaceBookmarked(bookmarks, place.properties);
+            const bookmarkPlace = () =>
+              onBookmarkClick({
+                isBookmarked,
+                properties: place.properties,
+              });
+            const setNewPlace = () => updatePlace(place.properties);
 
             return (
               <PlaceCard
                 key={place_id}
-                onBookmarkClick={() =>
-                  onBookmarkClick({
-                    isBookmarked,
-                    properties: place.properties,
-                  })
-                }
-                onArrowClick={() => updatePlace(place.properties)}
+                onBookmarkClick={bookmarkPlace}
+                onArrowClick={setNewPlace}
                 isBookmarked={isBookmarked}
                 {...place.properties}
               />

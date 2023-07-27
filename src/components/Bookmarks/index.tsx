@@ -15,20 +15,23 @@ export function Bookmarks() {
   const { resetRouteData } = useRoute();
   const isSelectedPlaceBookmarked = isPlaceBookmarked(bookmarks, selectedPlace);
 
+  const resetPlaceDetails = () => {
+    resetPlace();
+    resetRouteData();
+  };
+
+  const bookmarkSelectedPlace = () =>
+    onBookmarkClick({
+      isBookmarked: isSelectedPlaceBookmarked,
+      properties: selectedPlace,
+    });
+
   return (
     <Sidebar.PageWrapper>
       {selectedPlace ? (
         <PlaceDetails
-          onBack={() => {
-            resetPlace();
-            resetRouteData();
-          }}
-          onBookmarkClick={() =>
-            onBookmarkClick({
-              isBookmarked: isSelectedPlaceBookmarked,
-              properties: selectedPlace,
-            })
-          }
+          onBack={resetPlaceDetails}
+          onBookmarkClick={bookmarkSelectedPlace}
           isBookmarked={isSelectedPlaceBookmarked}
           {...selectedPlace}
         />
@@ -39,17 +42,18 @@ export function Bookmarks() {
           {bookmarks?.map((bookmark) => {
             const properties = extractProperties(bookmark);
             const isBookmarked = isPlaceBookmarked(bookmarks, properties);
+            const bookmarkPlace = () =>
+              onBookmarkClick({
+                isBookmarked,
+                properties,
+              });
+            const setNewPlace = () => updatePlace(properties);
 
             return (
               <PlaceCard
                 key={properties.place_id}
-                onBookmarkClick={() =>
-                  onBookmarkClick({
-                    isBookmarked,
-                    properties,
-                  })
-                }
-                onArrowClick={() => updatePlace(properties)}
+                onBookmarkClick={bookmarkPlace}
+                onArrowClick={setNewPlace}
                 isBookmarked={isBookmarked}
                 {...properties}
               />

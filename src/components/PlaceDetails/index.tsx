@@ -47,6 +47,8 @@ export const PlaceDetails = memo(function PlaceDetails({
 
   if (isLoading) return <Spinner />;
 
+  const setRoute = () => onRouteClick(lat, lon);
+
   return (
     <div className="flex w-full flex-col gap-3 rounded-xl">
       {isLoading ? (
@@ -87,10 +89,7 @@ export const PlaceDetails = memo(function PlaceDetails({
             >
               {isBookmarked ? <BookmarkFilledIcon /> : <BookmarkIcon />}
             </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => onRouteClick(lat, lon)}
-            >
+            <button className="btn btn-primary" onClick={setRoute}>
               {isLoadingRoute ? <Spinner /> : <LocationIcon />}
               {!routeData ? "Route" : "Reset route"}
             </button>
