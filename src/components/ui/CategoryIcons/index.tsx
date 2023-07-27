@@ -9,7 +9,11 @@ interface CategoryIconsProps {
 export const CategoryIcons = memo(function CategoryIcons({
   category,
 }: CategoryIconsProps) {
-  const { name, url } = categoriesMapping[category];
+  const categoryInfo = categoriesMapping[category];
+
+  if (!categoryInfo) return null;
+
+  const { name, url } = categoryInfo;
 
   return (
     <img
