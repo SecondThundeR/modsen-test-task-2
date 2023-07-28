@@ -2,6 +2,7 @@ import { memo } from "react";
 
 import { AlertError } from "@/components/ui/AlertError";
 import { AlertSuccess } from "@/components/ui/AlertSuccess";
+import { Toast } from "@/components/ui/Toast";
 
 interface MapAlertsProps {
   isLoading: boolean;
@@ -14,10 +15,10 @@ export const MapAlerts = memo(function MapAlerts({
 }: MapAlertsProps) {
   return (
     <div className="leaflet-top leaflet-right">
-      <div className="toast toast-end toast-top">
+      <Toast end top>
         {error !== null && <AlertError error={error} />}
         {isLoading && <AlertSuccess>Loading data...</AlertSuccess>}
-      </div>
+      </Toast>
     </div>
   );
 });
