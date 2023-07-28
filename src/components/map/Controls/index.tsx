@@ -15,17 +15,17 @@ export function MapControls() {
     handlers: { getLocation, zoomIn, zoomOut },
   } = useMapControls();
 
+  const getLocationButtonIcon = () => {
+    if (isFailed) return <XCircleIcon />;
+    if (isLocating) return <Spinner />;
+    return <LocationIcon />;
+  };
+
   return (
     <div className="leaflet-bottom leaflet-right">
       <div className="leaflet-control flex gap-2">
         <Button onClick={getLocation} disabled={isLocating}>
-          {isFailed ? (
-            <XCircleIcon />
-          ) : isLocating ? (
-            <Spinner />
-          ) : (
-            <LocationIcon />
-          )}
+          {getLocationButtonIcon()}
         </Button>
         <div>
           <Button isAccent className="rounded-r-none" onClick={zoomIn}>
