@@ -1,5 +1,8 @@
 import React, { PropsWithChildren } from "react";
 
+import { Heading } from "@/components/ui/Heading";
+import { Subheading } from "@/components/ui/Subheading";
+
 import { extractDetailsMessage } from "@/utils/error/extractDetailsMessage";
 
 interface ErrorBoundaryState {
@@ -30,11 +33,9 @@ export class ErrorBoundary extends React.Component<
     if (hasError) {
       return (
         <div className="flex h-screen flex-col items-center justify-center gap-2">
-          <h1 className="text-2xl font-bold">Something wrong happened!</h1>
+          <Heading>Something wrong happened!</Heading>
           <p>Sorry, an unexpected error has occurred</p>
-          <p className="italic opacity-70">
-            Details: {extractDetailsMessage(error)}
-          </p>
+          <Subheading>Details: {extractDetailsMessage(error)}</Subheading>
         </div>
       );
     }

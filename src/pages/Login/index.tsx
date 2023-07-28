@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import { Form } from "@/components/forms/Form";
 import { AlertError } from "@/components/ui/AlertError";
+import { AuthContainer } from "@/components/ui/AuthContainer";
+import { Heading } from "@/components/ui/Heading";
 
 import { ROUTES } from "@/constants/routes";
 
@@ -11,8 +13,8 @@ export function Login() {
   const { isLoading, error, onSubmit } = useLogin();
 
   return (
-    <div className="mx-auto flex h-screen w-full flex-col items-center justify-center gap-4 px-4 sm:w-1/2 lg:w-2/6">
-      <h1 className="text-3xl font-bold">Login</h1>
+    <AuthContainer>
+      <Heading>Login</Heading>
       <AlertError error={error} />
       <Form onSubmit={onSubmit}>
         <Form.Input
@@ -44,6 +46,6 @@ export function Login() {
           Go home
         </Link>
       </p>
-    </div>
+    </AuthContainer>
   );
 }

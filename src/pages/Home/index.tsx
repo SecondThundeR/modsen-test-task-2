@@ -1,4 +1,3 @@
-import cn from "classnames";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -12,6 +11,7 @@ import { ReactComponent as ShowIcon } from "@/assets/show.svg";
 
 import { Map } from "@/components/map";
 import { AvatarIcon } from "@/components/ui/AvatarIcon";
+import { HiddenContainer } from "@/components/ui/HiddenContainer";
 import { OverlayContainer } from "@/components/ui/OverlayContainer";
 import { Sidebar } from "@/components/ui/Sidebar";
 import { Spinner } from "@/components/ui/Spinner";
@@ -51,9 +51,8 @@ export function Home() {
           <Sidebar.Button onClick={hideElements}>
             {isHidden ? <ShowIcon /> : <HideIcon />}
           </Sidebar.Button>
-          {isFetching ? (
-            <Spinner />
-          ) : userData ? (
+          {isFetching && <Spinner />}
+          {userData ? (
             <>
               <AvatarIcon displayName={userData.displayName} />
               <Sidebar.Button onClick={handleLogout}>
@@ -66,13 +65,9 @@ export function Home() {
             </Sidebar.Button>
           )}
         </Sidebar>
-        <div
-          className={cn({
-            hidden: isHidden,
-          })}
-        >
+        <HiddenContainer isHidden={isHidden}>
           <Outlet />
-        </div>
+        </HiddenContainer>
       </OverlayContainer>
       <Map />
     </div>
