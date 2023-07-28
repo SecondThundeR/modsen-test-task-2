@@ -5,7 +5,10 @@ import { Subheading } from "@/components/ui/Subheading";
 
 import { useRoute } from "@/hooks/map/useRoute";
 
-type RouteData = Pick<ReturnType<typeof useRoute>, "routeData">["routeData"];
+type RouteData = Pick<
+  ReturnType<typeof useRoute>,
+  "currentRouteData"
+>["currentRouteData"];
 
 interface RouteCardProps {
   routeData: NonNullable<RouteData>;
