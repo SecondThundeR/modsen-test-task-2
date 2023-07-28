@@ -16,7 +16,7 @@ export function useRoute() {
   );
   const dispatch = useAppDispatch();
 
-  const routeData = data?.features[0].properties ?? null;
+  const currentRouteData = data?.features[0].properties;
 
   const onRouteClick = useCallback(
     async (lat: number, lon: number) => {
@@ -47,7 +47,7 @@ export function useRoute() {
   }, [dispatch]);
 
   return {
-    routeData,
+    currentRouteData,
     error,
     isLoading,
     onRouteClick,

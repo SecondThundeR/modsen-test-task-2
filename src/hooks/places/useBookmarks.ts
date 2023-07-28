@@ -48,7 +48,7 @@ export function useBookmarks() {
         datasource,
       } = properties;
 
-      const bookmark = {
+      const bookmarkEntry = {
         name: name ?? "",
         address_line2,
         lat,
@@ -59,9 +59,11 @@ export function useBookmarks() {
       await updateData({
         path: "bookmarks",
         key: place_id,
-        data: { ...bookmark, categories: categories.join(",") },
+        data: { ...bookmarkEntry, categories: categories.join(",") },
       });
-      dispatch(appendBookmark({ [place_id]: { ...bookmark, categories } }));
+      dispatch(
+        appendBookmark({ [place_id]: { ...bookmarkEntry, categories } }),
+      );
     },
     [dispatch, updateData],
   );

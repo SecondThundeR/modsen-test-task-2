@@ -42,7 +42,7 @@ export const PlaceDetails = memo(function PlaceDetails({
     placeName,
   );
   const {
-    routeData,
+    currentRouteData,
     error: routeError,
     isLoading: isLoadingRoute,
     onRouteClick,
@@ -88,13 +88,13 @@ export const PlaceDetails = memo(function PlaceDetails({
             </Button>
             <Button onClick={setRoute}>
               {isLoadingRoute ? <Spinner /> : <LocationIcon />}
-              {!routeData ? "Route" : "Reset route"}
+              {!currentRouteData ? "Route" : "Reset route"}
             </Button>
           </div>
-          {routeData && (
+          {currentRouteData && (
             <div className="flex flex-col gap-2">
               <Heading>Route details:</Heading>
-              <RouteCard routeData={routeData} />
+              <RouteCard routeData={currentRouteData} />
             </div>
           )}
         </>
